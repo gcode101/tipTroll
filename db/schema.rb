@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20151103230911) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "customers", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
@@ -32,4 +35,22 @@ ActiveRecord::Schema.define(version: 20151103230911) do
     t.datetime "updated_at",      null: false
   end
 
+  create_table "tickets", force: :cascade do |t|
+    t.string   "student"
+    t.text     "topic"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "tutor_id"
+    t.integer  "tutorid"
+  end
+
+  add_index "tickets", ["tutor_id"], name: "index_tickets_on_tutor_id", using: :btree
+
+  create_table "tutors", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "tickets", "tutors"
 end
