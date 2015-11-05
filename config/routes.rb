@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'sessions_pro/new'
+
+  get 'sessions/new'
+
   resources :professionals
   resources :customers
   # The priority is based upon order of creation: first created -> highest priority.
@@ -15,6 +19,27 @@ Rails.application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
+
+
+
+  get '/signup' => 'customers#new'
+  post '/customers' => 'customers#create'
+
+
+  get '/signup' => 'professionals#new'
+  post '/professionals' => 'professionals#create'
+
+
+  # these routes are for showing users a login form, logging them in, and logging them out.
+  get '/login' => 'sessions#new'
+  post '/login' => 'sessions#create'
+  get '/logout' => 'sessions#destroy'
+
+
+
+
+
+
 
   # Example resource route with options:
   #   resources :products do
