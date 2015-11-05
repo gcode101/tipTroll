@@ -27,8 +27,8 @@ class CustomersController < ApplicationController
   def create
     @customer = Customer.new(customer_params)
 
-    if user.save
-      session[:user_id] = user.id
+    if @customer.save
+      session[:customer_id] = @customer.id
       redirect_to '/'
     else
       redirect_to '/signup'
