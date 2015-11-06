@@ -14,6 +14,82 @@
   <%= @customer.password_digest %>
 </p>
 
+<p>How much would like you to contribute?</p>
+<input value="" id="amount">
+<button type="button" class="btn btn-primary" value="" id="charge">Pay Tip</button>
+<!-- <button type="button" class="btn btn-primary">Primary</button> -->
+
+<%= form_tag charges_path do %>
+
+<script src="https://checkout.stripe.com/checkout.js"></script>
+<script>
+payAction = function() {
+  var handler = StripeCheckout.configure({
+    key: "<%= Rails.application.secrets[:stripe_publishable_key] %>",
+    token: function(token) {
+      var postData = {
+        amount: parseInt($('#amount').val()),
+        stripeToken: token.id,
+      }
+
+      $.ajax({
+                type: 'POST',
+                url: '/charges',
+                data: postData,
+                success: function (reservation) {
+                    console.log('ok');
+
+                },
+                error: function (request, error) {
+                    console.log(arguments);
+                    alert("failure");
+                }
+            });
+    }
+
+  });
+
+
+  $('#charge').on('click', function(e) {
+    e.preventDefault();
+    var total = parseInt($('#amount').val());
+    handler.open({
+              name: 'Tip',
+              description: 'Input Your Payment Details',
+              amount: total
+          });
+  });
+}
+
+$(document).ready(payAction);
+</script>
+
+
+<% end %>
+
+  <!-- <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+  //         data-key="<%= Rails.application.secrets[:stripe_publishable_key] %>"
+  //         data-amount=$('#charge').val()
+  //         data-name="Test Site"
+  //         data-description="2 widgets ($5.00)"
+  //         data-image="/128x128.png"
+  //         data-locale="auto">
+  // </script>
+
+-->
+
+<!--<form action="/charges" method="POST">
+  <script
+    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="pk_test_6pRNASCoBOKtIshFeQd4XMUh"
+    data-amount="500"
+    data-name="Test Site"
+    data-description="2 widgets ($5.00)"
+    data-image="/128x128.png"
+    data-locale="auto">
+  </script>
+</form>-->
+
 <%= link_to 'Edit', edit_customer_path(@customer) %> |
 <%= link_to 'Back', customers_path %>
 

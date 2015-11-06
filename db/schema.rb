@@ -27,6 +27,9 @@ ActiveRecord::Schema.define(version: 20151106025130) do
   add_index "cust_ratings", ["customer_id"], name: "index_cust_ratings_on_customer_id", using: :btree
   add_index "cust_ratings", ["professional_id"], name: "index_cust_ratings_on_professional_id", using: :btree
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "customers", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
