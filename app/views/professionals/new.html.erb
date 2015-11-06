@@ -3,6 +3,7 @@
 <%= form_for :professional, url: '/professionals' do |f| %>
 
   Name: <%= f.text_field :name %>
+  Username: <%= f.text_field :username %>
   Email: <%= f.text_field :email %>
   Password: <%= f.password_field :password %>
   Password Confirmation: <%= f.password_field :password_confirmation %>

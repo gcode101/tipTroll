@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'sessions_pro/new'
-
   get 'sessions/new'
 
   resources :professionals
@@ -22,18 +20,27 @@ Rails.application.routes.draw do
 
 
 
-  get '/signup' => 'customers#new'
+  get '/signup' => 'customers#show'
   post '/customers' => 'customers#create'
+
+
+  # these routes are for showing users a login form, logging them in, and logging them out.
+  get '/login' => 'sessions#new'
+  post '/login' => 'sessions#create_customer'
+  get '/logout' => 'sessions#destroy_customer'
+
 
 
   get '/signup' => 'professionals#new'
   post '/professionals' => 'professionals#create'
 
 
-  # these routes are for showing users a login form, logging them in, and logging them out.
   get '/login' => 'sessions#new'
-  post '/login' => 'sessions#create'
-  get '/logout' => 'sessions#destroy'
+  post '/login' => 'sessions#create_professional'
+  get '/logout' => 'sessions#destroy_professional'
+
+
+
 
 
 
