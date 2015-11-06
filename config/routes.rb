@@ -1,8 +1,23 @@
 Rails.application.routes.draw do
+
   get 'sessions/new'
+
+
+  get 'pro_ratings/update'
+
+  get 'cust_ratings/update'
+
 
   resources :professionals
   resources :customers
+  resources :charges
+  resources :cust_ratings, only: :update
+  resources :pro_ratings, only: :update
+
+  post 'ratings/new', to: 'ratings#new'
+
+  root 'homes#index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
