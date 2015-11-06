@@ -1,5 +1,16 @@
-<h1>New Professional</h1>
+<h1>Signup!</h1>
 
-<%= render 'form' %>
+<%= form_for :professional, url: '/professionals' do |f| %>
 
-<%= link_to 'Back', professionals_path %>
+  Name: <%= f.text_field :name %>
+  Username: <%= f.text_field :username %>
+  Email: <%= f.text_field :email %>
+  Password: <%= f.password_field :password %>
+  Password Confirmation: <%= f.password_field :password_confirmation %>
+  <%= f.submit "Submit" %>
+
+<% end %>
+
+<%#= render 'form' %>
+
+<%#= link_to 'Back', professionals_path %>

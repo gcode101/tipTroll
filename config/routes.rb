@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
 
+  get 'sessions/new'
+
+
   get 'pro_ratings/update'
 
   get 'cust_ratings/update'
+
 
   resources :professionals
   resources :customers
@@ -28,6 +32,36 @@ Rails.application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
+
+
+
+  get '/signup' => 'customers#show'
+  post '/customers' => 'customers#create'
+
+
+  # these routes are for showing users a login form, logging them in, and logging them out.
+  get '/login' => 'sessions#new'
+  post '/login' => 'sessions#create_customer'
+  get '/logout' => 'sessions#destroy_customer'
+
+
+
+  get '/signup' => 'professionals#new'
+  post '/professionals' => 'professionals#create'
+
+
+  get '/login' => 'sessions#new'
+  post '/login' => 'sessions#create_professional'
+  get '/logout' => 'sessions#destroy_professional'
+
+
+
+
+
+
+
+
+
 
   # Example resource route with options:
   #   resources :products do

@@ -27,15 +27,14 @@ class ProfessionalsController < ApplicationController
   def create
     @professional = Professional.new(professional_params)
 
-    respond_to do |format|
-      if @professional.save
-        format.html { redirect_to @professional, notice: 'Professional was successfully created.' }
-        format.json { render :show, status: :created, location: @professional }
-      else
-        format.html { render :new }
-        format.json { render json: @professional.errors, status: :unprocessable_entity }
-      end
+    if professional.save
+      session[:professional_id] = professional.id
+      redirect_to '/'
+    else
+      redirect_to '/signup'
     end
+
+
   end
 
   # PATCH/PUT /professionals/1
@@ -70,6 +69,10 @@ class ProfessionalsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def professional_params
-      params.require(:professional).permit(:name, :email, :job_location, :job_title, :phone_number, :password_digest)
+      params.require(:professional).permit(:name, :email, :job_location, :job_title, :phone_number, :password_confirmation)
     end
+
+
+
+
 end

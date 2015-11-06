@@ -1,5 +1,6 @@
 class CustomersController < ApplicationController
   before_action :set_customer, only: [:show, :edit, :update, :destroy]
+  # before_filter :authorize
 
   # GET /customers
   # GET /customers.json
@@ -28,14 +29,11 @@ class CustomersController < ApplicationController
   def create
     @customer = Customer.new(customer_params)
 
-    respond_to do |format|
-      if @customer.save
-        format.html { redirect_to @customer, notice: 'Customer was successfully created.' }
-        format.json { render :show, status: :created, location: @customer }
-      else
-        format.html { render :new }
-        format.json { render json: @customer.errors, status: :unprocessable_entity }
-      end
+    if @customer.save
+      session[:customer_id] = @customer.id
+      redirect_to '/'
+    else
+      redirect_to '/signup'
     end
   end
 
@@ -71,6 +69,6 @@ class CustomersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def customer_params
-      params.require(:customer).permit(:name, :email, :password_digest)
+      params.require(:customer).permit(:name, :email, :password, :password_confirmation)
     end
 end

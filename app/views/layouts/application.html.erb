@@ -24,6 +24,15 @@
 </head>
 <body>
 
+
+<% if current_customer %>
+  Signed in as <%= current_customer.name %> | <%= link_to "Logout", '/logout' %>
+<% else %>
+  <%= link_to 'Login', '/login' %> | <%= link_to 'Signup', '/signup' %>
+<% end %>
+
+
+
 <%= yield %>
 
 </body>
