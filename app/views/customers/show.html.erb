@@ -21,7 +21,7 @@
 
 <%= form_tag charges_path do %>
 
-<script src="https://checkout.stripe.com/checkout.js"></script>
+
 <script>
 payAction = function() {
   var handler = StripeCheckout.configure({
@@ -68,7 +68,7 @@ $(document).ready(payAction);
 <% end %>
 
   <!-- <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-  //         data-key="<%= Rails.application.secrets[:stripe_publishable_key] %>"
+  //         data-key="<%= #Rails.application.secrets[:stripe_publishable_key] %>"
   //         data-amount=$('#charge').val()
   //         data-name="Test Site"
   //         data-description="2 widgets ($5.00)"
