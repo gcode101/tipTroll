@@ -11,7 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151103230911) do
+ActiveRecord::Schema.define(version: 20151106025130) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "cust_ratings", force: :cascade do |t|
+    t.integer  "customer_id"
+    t.integer  "professional_id"
+    t.integer  "score",           default: 0
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "cust_ratings", ["customer_id"], name: "index_cust_ratings_on_customer_id", using: :btree
+  add_index "cust_ratings", ["professional_id"], name: "index_cust_ratings_on_professional_id", using: :btree
 
   create_table "customers", force: :cascade do |t|
     t.string   "name"
@@ -20,6 +34,17 @@ ActiveRecord::Schema.define(version: 20151103230911) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
+
+  create_table "pro_ratings", force: :cascade do |t|
+    t.integer  "customer_id"
+    t.integer  "professional_id"
+    t.integer  "score",           default: 0
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "pro_ratings", ["customer_id"], name: "index_pro_ratings_on_customer_id", using: :btree
+  add_index "pro_ratings", ["professional_id"], name: "index_pro_ratings_on_professional_id", using: :btree
 
   create_table "professionals", force: :cascade do |t|
     t.string   "name"
@@ -32,4 +57,8 @@ ActiveRecord::Schema.define(version: 20151103230911) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "cust_ratings", "customers"
+  add_foreign_key "cust_ratings", "professionals"
+  add_foreign_key "pro_ratings", "customers"
+  add_foreign_key "pro_ratings", "professionals"
 end

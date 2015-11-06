@@ -10,6 +10,8 @@ class CustomersController < ApplicationController
   # GET /customers/1
   # GET /customers/1.json
   def show
+    # @rating = Rating.where(customer_id: @current_customer.id).first
+    @rating = CustRating.find_or_create_by(customer_id: @customer.id)
   end
 
   # GET /customers/new
