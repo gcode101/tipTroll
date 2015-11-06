@@ -1,0 +1,9 @@
+
+$('#star').raty({ readOnly: true, score: <%= @customer.average_rating %>, path: '/assets'
+});
+
+$('#user_star').raty({
+  score: <%= @cust_rating.score %>, path: '/assets', click: function(score, evt) {
+    $.ajax({ url: '/ratings/' + <%= @cust_rating.id %>, type: 'PATCH', data: { score: score } }).done(function (data){});
+  }
+});
