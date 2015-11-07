@@ -31,9 +31,9 @@ class CustomersController < ApplicationController
 
     if @customer.save
       session[:customer_id] = @customer.id
-      redirect_to '/'
+      redirect_to customer_path(@customer)
     else
-      redirect_to '/signup'
+      redirect_to signup_path
     end
   end
 

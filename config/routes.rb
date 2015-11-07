@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get 'pro_ratings/update'
   get 'cust_ratings/update'
 
+  get 'customers/:id' => 'customers#show'
+
   resources :professionals
   resources :customers
   resources :charges
@@ -34,6 +36,8 @@ Rails.application.routes.draw do
   post '/customers' => 'customers#create'
 
 
+
+
   # these routes are for showing users a login form, logging them in, and logging them out.
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create_customer'
@@ -41,13 +45,13 @@ Rails.application.routes.draw do
 
 
 
-  get '/signup' => 'professionals#new'
+  get '/pro_signup' => 'professionals#new'
   post '/professionals' => 'professionals#create'
 
 
-  get '/login' => 'sessions#new'
-  post '/login' => 'sessions#create_professional'
-  get '/logout' => 'sessions#destroy_professional'
+  get '/pro_login' => 'sessions_pro#new'
+  post '/pro_login' => 'sessions_pro#create_professional'
+  get '/pro_logout' => 'sessions_pro#destroy_professional'
 
 
 
