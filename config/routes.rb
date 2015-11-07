@@ -15,6 +15,12 @@ Rails.application.routes.draw do
 
   post 'ratings/new', to: 'ratings#new'
 
+
+  resources :professionals do
+    put :favorite, on: :member
+  end
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

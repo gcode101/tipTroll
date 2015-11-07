@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151106150608) do
+ActiveRecord::Schema.define(version: 20151107223442) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,14 @@ ActiveRecord::Schema.define(version: 20151106150608) do
     t.datetime "updated_at",      null: false
     t.string   "username"
   end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer  "customer_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "favorites", ["customer_id"], name: "index_favorites_on_customer_id", using: :btree
 
   create_table "pro_ratings", force: :cascade do |t|
     t.integer  "customer_id"
@@ -72,6 +80,7 @@ ActiveRecord::Schema.define(version: 20151106150608) do
 
   add_foreign_key "cust_ratings", "customers"
   add_foreign_key "cust_ratings", "professionals"
+  add_foreign_key "favorites", "customers"
   add_foreign_key "pro_ratings", "customers"
   add_foreign_key "pro_ratings", "professionals"
   add_foreign_key "tips", "customers"
