@@ -9,11 +9,6 @@
   <%= @customer.email %>
 </p>
 
-<p>
-  <strong>Password digest:</strong>
-  <%= @customer.password_digest %>
-</p>
-
 <p>How much would like you to contribute?</p>
 <input value="" id="amount">
 <button type="button" class="btn btn-primary" value="" id="charge">Pay Tip</button>
@@ -68,7 +63,10 @@ $(document).ready(payAction);
 <% end %>
 
 
-<%= link_to 'Edit', edit_customer_path(@customer) %> |
+<% if is_this_me?(@customer) %>
+<%= link_to('Edit', edit_customer_path(@customer)) %>
+<% end %>|
+
 <%= link_to 'Back', customers_path %> |
 <%= link_to 'Logout', logout_path %>
 

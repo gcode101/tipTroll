@@ -1,17 +1,8 @@
 <p id="notice"> <%= notice %></p>
-<h1>Signup!</h1>
+<h1>New Professional Account</h1>
 
-<%= form_for :professional, url: '/professionals' do |f| %>
+<%= render 'form' %>
 
-  Name: <%= f.text_field :name %>
-  Username: <%= f.text_field :username %>
-  Email: <%= f.text_field :email %>
-  Password: <%= f.password_field :password %>
-  Password Confirmation: <%= f.password_field :password_confirmation %>
-  <%= f.submit "Submit" %>
+<%= link_to 'Back', root_path %>
 
-<% end %>
 
-<%#= render 'form' %>
-
-<%#= link_to 'Back', professionals_path %>
