@@ -28,7 +28,7 @@ payAction = function() {
     key: "<%= Rails.application.secrets[:stripe_publishable_key] %>",
     token: function(token) {
       var postData = {
-        amount: parseInt($('#amount').val()),
+        amount: parseFloat($('#amount').val()) * 100,
         stripeToken: token.id,
       }
 
@@ -52,7 +52,7 @@ payAction = function() {
 
   $('#charge').on('click', function(e) {
     e.preventDefault();
-    var total = parseInt($('#amount').val());
+    var total = parseFloat($('#amount').val()) * 100;
     handler.open({
               name: 'Tip',
               description: 'Input Your Payment Details',
