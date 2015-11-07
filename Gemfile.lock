@@ -166,9 +166,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-
   bcrypt (~> 3.1.7)
-
   better_errors
   byebug
   coffee-rails (~> 4.1.0)
