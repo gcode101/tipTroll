@@ -22,12 +22,16 @@ class ApplicationController < ActionController::Base
     redirect_to '/login' unless current_professional
   end
 
+  def is_this_me?(customer)
+    current_customer && current_customer.id == customer.id
+  end
 
+  def is_this_pro?(professional)
+    current_professional && current_professional.id == professional.id
+  end
 
-
-
-
-
+  helper_method :is_this_pro?
+  helper_method :is_this_me?
 
 
 end

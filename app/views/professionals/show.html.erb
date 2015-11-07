@@ -25,14 +25,9 @@
   <%= @professional.phone_number %>
 </p>
 
-<p>
-  <strong>Password digest:</strong>
-  <%= @professional.password_digest %>
-</p>
-
-
-
-<%= link_to 'Edit', edit_professional_path(@professional) %> |
+<% if is_this_pro?(@professional) %>
+<%= link_to('Edit', edit_professional_path(@professional)) %>
+<% end %>
 <%= link_to 'Back', professionals_path %>
 <%= link_to 'Logout', pro_logout_path %>
 

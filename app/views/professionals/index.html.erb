@@ -10,7 +10,7 @@
       <th>Job location</th>
       <th>Job title</th>
       <th>Phone number</th>
-      <th>Password digest</th>
+
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -23,15 +23,14 @@
         <td><%= professional.job_location %></td>
         <td><%= professional.job_title %></td>
         <td><%= professional.phone_number %></td>
-        <td><%= professional.password_digest %></td>
+
         <td><%= link_to 'Show', professional %></td>
-        <td><%= link_to 'Edit', edit_professional_path(professional) %></td>
-        <td><%= link_to 'Destroy', professional, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+
+
     <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Professional', new_professional_path %>
+<%= link_to 'Logout', pro_logout_path %>
