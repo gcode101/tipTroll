@@ -1,4 +1,4 @@
-
+<p id="notice"> <%= notice %></p>
 <p>
   <strong>Name:</strong>
   <%= @customer.name %>
@@ -69,7 +69,8 @@ $(document).ready(payAction);
 
 
 <%= link_to 'Edit', edit_customer_path(@customer) %> |
-<%= link_to 'Back', customers_path %>
+<%= link_to 'Back', customers_path %> |
+<%= link_to 'Logout', logout_path %>
 
 <h3>Average rating</h3>
 

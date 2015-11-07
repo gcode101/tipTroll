@@ -27,11 +27,11 @@ class ProfessionalsController < ApplicationController
   def create
     @professional = Professional.new(professional_params)
 
-    if professional.save
-      session[:professional_id] = professional.id
-      redirect_to '/'
+    if @professional.save
+      session[:professional_id] = @professional.id
+      redirect_to professional_path(@professional)
     else
-      redirect_to '/signup'
+      redirect_to pro_signup_path, notice: "An error has ocurred!"
     end
 
 

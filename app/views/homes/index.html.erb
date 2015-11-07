@@ -48,7 +48,9 @@
 </nav>
 
 
-<button type="button" class="btn btn-primary btn-lg">Log-In as a Customer</button>
-<button type="button" class="btn btn-primary btn-lg">Log-In as a Professional</button>
+<button type="button" class="btn btn-primary btn-lg"><%= link_to 'Log-In as a Customer', login_path %></button>
+<button type="button" class="btn btn-primary btn-lg"><%= link_to 'Log-In as a Professional', pro_login_path %></button>
+<%= link_to 'Customer Sign up', signup_path %> |
+<%= link_to 'Professional Sign up', pro_signup_path %>
 
 
