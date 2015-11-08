@@ -89,3 +89,16 @@ $(document).ready(payAction);
   var ratingType = "<%= @rating.class.to_s %>";
 	userRating(theScore, ratingId);
 </script>
+
+<!-- code below is for the favorites feature -->
+<% if current_customer %>
+  <%= link_to "favorite", favorite_professional_path(@professional, type: "favorite"), method: :put %>
+  <%= link_to "unfavorite", favorite_professional_path(@professional, type: "unfavorite"), method: :put %>
+<% end %>
+
+
+
+
+
+
+

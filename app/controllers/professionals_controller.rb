@@ -61,6 +61,21 @@ class ProfessionalsController < ApplicationController
     end
   end
 
+  def favorite
+    type = params[:type]
+      if type == "favorite"
+        current_customer.favorites << @professional
+        redirect_to :back, notice: 'You favorited #{@professional.name}'
+
+      elsif type == "unfavorite"
+        current_customer.favorites.delete(@professional)
+        redirect_to :back, notice: 'Unfavorited #{@professional.name}'
+
+      else
+        redirect_to :back, notice: 'Nothing happened.'
+      end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_professional
