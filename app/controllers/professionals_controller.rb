@@ -11,6 +11,7 @@ class ProfessionalsController < ApplicationController
   # GET /professionals/1.json
   def show
      @rating = ProRating.find_or_create_by(professional_id: @professional.id)
+     @favorite = current_customer.favorites.find_by(professional_id: @professional.id)
   end
 
   # GET /professionals/new
