@@ -34,3 +34,20 @@
 <br>
 
 <%= link_to 'Logout', pro_logout_path %>
+
+
+<h1>Google Maps</h1>
+<form method="get" id="chooseZip">
+      <button type="submit" class="learnButton">Use current location</button>
+      <br/>
+      <h4>Or</h4>
+      <div class="zipSearch">
+        <input id="textZip" type="text" name="zip" placeholder="enter your zip code" autofocus>
+        <button type="submit" class="learnButton">Search</button>
+      </div>
+      <div class="clear"></div>
+    </form>
+<div id="map-container">
+  <div id="map-canvas"></div>
+</div>
+

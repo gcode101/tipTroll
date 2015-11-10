@@ -1,4 +1,4 @@
-var ready = function() {
+var ready2 = function() {
 	var avgScore = $('.average_rating').data('score');
 	averageRating(avgScore);
 
@@ -6,8 +6,8 @@ var ready = function() {
 	proAverageRating(proAvgScore);
 };
 
-$(document).ready(ready);
-$(document).on('page:load', ready);
+$(document).ready(ready2);
+$(document).on('page:load', ready2);
 
 function averageRating(avgScore){
 	$('.average_rating').raty({

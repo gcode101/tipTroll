@@ -16,4 +16,12 @@ class Professional < ActiveRecord::Base
   	pro_ratings.sum(:score) / pro_ratings.size
 	end
 
+  def self.search(search)
+      if search
+       self.where('job_location LIKE ?', "%#{search}%")
+      else
+        all
+      end
+  end
+
 end
