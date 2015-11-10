@@ -40,7 +40,6 @@ var ready = function(){
 
     function success(pos){
       userCords = pos.coords;
-      console.log(userCords);
       //return userCords;
     }
 
@@ -69,6 +68,26 @@ var ready = function(){
     } else {
       accessURL = "http://search.ams.usda.gov/farmersmarkets/v1/data.svc/locSearch?lat=" + userCords.latitude + "&lng=" + userCords.longitude;
     }
+
+
+    //Use the zip code and return all market ids in area.
+    $.ajax({
+      type: "GET",
+      contentType: "application/json; charset=utf-8",
+      url: accessURL,
+      data: {
+        zipCode: userZip,
+      },
+      success: function (data) {
+        var counter = 0;
+        for (var i = 0; i < data.professional.length; i++) {
+          person = data.professional[i];
+
+          var address = person.job_location;
+          add_marker(map, address);
+        };
+      }
+    }); // end ajax
 
     return false; // important: prevent the form from submitting
   }); // end submit
@@ -106,7 +125,6 @@ var ready = function(){
             infowindow.setContent(this.html);
             infowindow.open(map, this);
           });
-
         } else {
           alert("Geocode was not successful for the following reason: " + status);
         }
