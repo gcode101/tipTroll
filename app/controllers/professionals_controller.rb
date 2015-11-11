@@ -19,13 +19,8 @@ class ProfessionalsController < ApplicationController
   end
 
   def search
-    @professionals = Professional.search(params[:zipCode])
-
-    respond_to do |format|
-      format.json {
-        render json: { professional: @professionals }.to_json
-      }
-    end
+    @professionals = Professional.search(params[:zipCode], params[:profession])
+    render :index
   end
 
   # GET /professionals/1/edit

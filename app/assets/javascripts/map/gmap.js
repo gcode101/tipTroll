@@ -60,31 +60,38 @@ var ready = function(){
 
     //define and set variables
     var userZip = $("#textZip").val();
+    var profession = $("#profession").val();
 
     var accessURL;
 
     if(userZip){
       accessURL = '/professionals/search';
     } else {
-      accessURL = "http://search.ams.usda.gov/farmersmarkets/v1/data.svc/locSearch?lat=" + userCords.latitude + "&lng=" + userCords.longitude;
+      alert("Please enter a zip code.");
+      return false;
+      // accessURL = "http://search.ams.usda.gov/farmersmarkets/v1/data.svc/locSearch?lat=" + userCords.latitude + "&lng=" + userCords.longitude;
     }
 
 
     //Use the zip code and return all market ids in area.
     $.ajax({
       type: "GET",
-      contentType: "application/json; charset=utf-8",
+      dataType: "json",
       url: accessURL,
       data: {
         zipCode: userZip,
+        profession: profession
       },
-      success: function (data) {
+      success: function (pros) {
+        console.log(pros);
         var counter = 0;
-        for (var i = 0; i < data.professional.length; i++) {
-          person = data.professional[i];
-
+        for (var i = 0; i < pros.length; i++) {
+          person = pros[i];
           var address = person.job_location;
-          add_marker(map, address);
+          var name = person.name;
+          var jobTitle = person.job_title;
+          var score = person.average_rating;
+          add_marker(map, address, name, jobTitle, score);
         };
       }
     }); // end ajax
@@ -97,7 +104,7 @@ var ready = function(){
   // });
 
 
-  function add_marker(map, address) {
+  function add_marker(map, address, name, job_title, score) {
     new google.maps.Geocoder().geocode( { 'address': address }, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         var latitude = results[0].geometry.location.lat();
@@ -106,30 +113,36 @@ var ready = function(){
         map.setZoom(13);
 
         var myLatlng = new google.maps.LatLng(latitude,longitude);
-
-        //set the markers.
-        var allMarkers = new google.maps.Marker({
+        var rating;
+        //set the markers
+        var marker = new google.maps.Marker({
           position: myLatlng,
           map: map,
-          title: "Barbers",
+          title: "Pros",
           html:
-          '<div class="markerPop">' +
-          '<h1>' + "Barbers" + '</h1>' +
-          '<h3>' + results['Address'] + '</h3>' +
-          '<p>' + results['Products'] + '</p>' +
-          '<p>' + results['Schedule'] + '</p>' +
-          '</div>'
+            '<div class="markerPop">' +
+            '<h1>' + name + '</h1>' +
+            '<h3>' + job_title + '</h3>' +
+            '<p>' + address + '</p>' +
+            '<p class="average_rating" data-score="' + score +'"></p>' +
+            '</div>',
         });
 
-          google.maps.event.addListener(allMarkers, 'click', function () {
-            infowindow.setContent(this.html);
-            infowindow.open(map, this);
-          });
-        } else {
-          alert("Geocode was not successful for the following reason: " + status);
-        }
-      }); // end geocoder
-    }
+        google.maps.event.addListener(marker, 'click', function () {
+          infowindow.setContent(this.html);
+          infowindow.open(map, this);
+          $('.average_rating').raty({
+            starOn: 'assets/star-on.png', // <%= image_path('star-on.png') %>
+            starOff: 'assets/star-off.png', // <%= image_path('star-off.png') %>
+            readOnly: true,
+            score: score
+          })
+        });
+      } else {
+        alert("Geocode was not successful for the following reason: " + status);
+      } // end if
+    }); // end geocoder
+  }
 }
 
 $(document).ready(ready);
