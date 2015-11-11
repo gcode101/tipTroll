@@ -61,16 +61,17 @@ var ready = function(){
     //define and set variables
     var userZip = $("#textZip").val();
     var profession = $("#profession").val();
+    var currentLocation = false;
 
     var accessURL;
 
     if(userZip){
       accessURL = '/professionals/search';
     } else {
-      alert("Please enter a zip code.");
-      return false;
-      // accessURL = "http://search.ams.usda.gov/farmersmarkets/v1/data.svc/locSearch?lat=" + userCords.latitude + "&lng=" + userCords.longitude;
+      accessURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + userCords.latitude + "," + userCords.longitude + "&key=AIzaSyD1mlt84glCEnMOVTEY28A_x__LSnynxXw";
+      currentLocation = true;
     }
+    // "API Key: " AIzaSyD1mlt84glCEnMOVTEY28A_x__LSnynxXw
 
 
     //Use the zip code and return all market ids in area.
@@ -83,18 +84,39 @@ var ready = function(){
         profession: profession
       },
       success: function (pros) {
-        console.log(pros);
-        var counter = 0;
-        for (var i = 0; i < pros.length; i++) {
-          person = pros[i];
-          var address = person.job_location;
-          var name = person.name;
-          var jobTitle = person.job_title;
-          var score = person.average_rating;
-          add_marker(map, address, name, jobTitle, score);
-        };
+        if(pros.length === 0) {
+          alert("Sorry, we couldn't find anybody with those specifications.");
+          return false;
+        }
+        if (currentLocation) {
+          var jsonZipCode = pros.results[0].address_components[7].long_name
+          $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: '/professionals/search',
+            data: {
+              zipCode: jsonZipCode,
+              profession: profession
+            },
+            success: function(pro2){
+              addingTheMarkers(pro2);
+            }
+          });//end ajax
+        }//end of if currentLocation
+        addingTheMarkers(pros);
+
+        function addingTheMarkers(pros){
+          for (var i = 0; i < pros.length; i++) {
+            person = pros[i];
+            var address = person.job_location;
+            var name = person.name;
+            var jobTitle = person.job_title;
+            var score = person.average_rating;
+            add_marker(map, address, name, jobTitle, score);
+          };
+        }
       }
-    }); // end ajax
+    }); // end of first ajax
 
     return false; // important: prevent the form from submitting
   }); // end submit
