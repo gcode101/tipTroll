@@ -7,11 +7,13 @@ class FavoritesController < ApplicationController
     redirect_to :back
   end
 
-   def delete
+  def delete
     favorite = current_customer.favorites.find_by(professional_id: params[:professional_id])
     favorite.destroy unless favorite.nil?
     redirect_to :back
   end
+
+
 
 
 end
