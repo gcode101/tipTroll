@@ -10,6 +10,7 @@
       <th>Job location</th>
       <th>Job title</th>
       <th>Phone number</th>
+      <th>Score</th>
 
       <th colspan="3"></th>
     </tr>
@@ -20,7 +21,7 @@
       <tr>
         <td><%= professional.name %></td>
         <td><%= professional.email %></td>
-        <td><%= professional.job_location %></td>
+        <td class="location"><%= professional.job_location %></td>
         <td><%= professional.job_title %></td>
         <td><%= professional.phone_number %></td>
 
@@ -34,3 +35,21 @@
 <br>
 
 <%= link_to 'Logout', pro_logout_path %>
+
+
+<h1>Google Maps</h1>
+<form method="get" id="chooseZip">
+      <button type="submit" class="learnButton">Use current location</button>
+      <br/>
+      <h4>Or</h4>
+      <div class="zipSearch">
+        <input id="profession" type="text" name="profession" placeholder="enter profession" autofocus><br>
+        <input id="textZip" type="text" name="zip" placeholder="enter your zip code" autofocus>
+        <button type="submit" class="learnButton">Search</button>
+      </div>
+      <div class="clear"></div>
+    </form>
+<div id="map-container">
+  <div id="map-canvas"></div>
+</div>
+
