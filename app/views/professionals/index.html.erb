@@ -34,3 +34,7 @@
 <br>
 
 <%= link_to 'Logout', pro_logout_path %>
+
+<% if current_customer %>
+<%= link_to 'back to profile', customer_path(current_customer) %>
+<% end %>
