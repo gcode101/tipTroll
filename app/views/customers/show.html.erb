@@ -20,12 +20,15 @@
 
 
 <script>
+var total;
+
 payAction = function() {
   var handler = StripeCheckout.configure({
     key: "<%= Rails.application.secrets[:stripe_publishable_key] %>",
     token: function(token) {
+
       var postData = {
-        amount: parseFloat($('.amount').val()) * 100,
+        amount: total,
         stripeToken: token.id,
       }
 
@@ -34,10 +37,14 @@ payAction = function() {
                 url: '/charges',
                 data: postData,
                 success: function (reservation) {
-                  $('.message').append('<h2>Thank you, you paid $<strong>' + $('.amount').val() + '</strong>!</h2>');
+                  formatted_total = '$' + (total/100) + '.' + (total%100);
+
+                  $('.message').empty();
+                  $('.message').append('<h2>Thank you, you paid $<strong>' + formatted_total + '</strong>!</h2>');
                   $('.message').show();
                 },
                 error: function (request, error) {
+                  $('.message').empty();
                   $('.message').append('<h2>We apologize but your payment did not go through.</h2>');
                   $('.message').show();
                 }
@@ -49,7 +56,8 @@ payAction = function() {
 
   $('.tip-btn').on('click', function(e) {
     e.preventDefault();
-    var total = parseFloat($(this).siblings('.amount').val()) * 100;
+    total = parseFloat($(this).siblings('.amount').val()) * 100;
+
     handler.open({
               name: 'Tip',
               description: 'Input Your Payment Details',
