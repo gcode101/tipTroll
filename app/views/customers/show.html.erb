@@ -14,7 +14,6 @@
 <input value="" id="amount">
 <button type="button" class="btn btn-primary" value="" id="charge">Pay Tip</button>
 <!-- <button type="button" class="btn btn-primary">Primary</button> -->
-
 <%= form_tag charges_path do %>
 
 
@@ -55,6 +54,7 @@ payAction = function() {
               amount: total
           });
   });
+
 }
 
 $(document).ready(payAction);
@@ -89,3 +89,9 @@ $(document).ready(payAction);
   var ratingType = "<%= @rating.class.to_s %>";
 	userRating(theScore, ratingId);
 </script>
+
+
+
+
+
+
