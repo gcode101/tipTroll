@@ -164,8 +164,8 @@ var ready = function(){
           infowindow.setContent(this.html);
           infowindow.open(map, this);
           $('.average_rating').raty({
-            starOn: 'assets/star-on.png', // <%= image_path('star-on.png') %>
-            starOff: 'assets/star-off.png', // <%= image_path('star-off.png') %>
+            starOn: "<%= asset_path('img/star-on.png') %>", // <%= image_path('star-on.png') %>
+            starOff: "<%= asset_path('img/star-off.png') %>", // <%= image_path('star-off.png') %>
             readOnly: true,
             score: score
           })

@@ -11,8 +11,8 @@ $(document).on('page:load', ready2);
 
 function averageRating(avgScore){
 	$('.average_rating').raty({
-		starOn: '<%= asset_path('star-on.png') %>',
-		starOff: '<%= asset_path('star-off.png') %>',
+		starOn: "<%= asset_path('img/star-on.png') %>",
+		starOff: "<%= asset_path('img/star-off.png') %>",
 		readOnly: true,
 		score: avgScore
 		});
@@ -20,8 +20,8 @@ function averageRating(avgScore){
 
 	function userRating(theScore, rating){
 	$('.user_rating').raty({
-		starOn: '<%= asset_path('star-on.png') %>',
-		starOff: '<%= asset_path('star-off.png') %>',
+		starOn: "<%= asset_path('img/star-on.png') %>",
+        starOff: "<%= asset_path('img/star-off.png') %>",
 		click: function(score, evt) {
       $.ajax({
         url: '/ratings/new',
@@ -42,8 +42,8 @@ function averageRating(avgScore){
 
 function proAverageRating(proAvgScore){
 	$('.pro_average_rating').raty({
-		starOn: '<%= asset_path('star-on.png') %>',
-		starOff: '<%= asset_path('star-off.png') %>',
+		starOn: "<%= asset_path('img/star-on.png') %>",
+		starOff: "<%= asset_path('img/star-off.png') %>",
 		readOnly: true,
 		score: proAvgScore
 		});
@@ -51,8 +51,8 @@ function proAverageRating(proAvgScore){
 
 	function proUserRating(theScore, rating){
 	$('.pro_user_rating').raty({
-		starOn: '<%= asset_path('star-on.png') %>',
-		starOff: '<%= asset_path('star-off.png') %>',
+		starOn: "<%= asset_path('img/star-on.png') %>",
+		starOff: "<%= asset_path('img/star-off.png') %>",
 		click: function(score, evt) {
       $.ajax({
         url: '/ratings/new',
