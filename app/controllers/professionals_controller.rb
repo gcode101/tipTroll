@@ -21,6 +21,11 @@ class ProfessionalsController < ApplicationController
     @professional = Professional.new
   end
 
+  def search
+    @professionals = Professional.search(params[:zipCode], params[:profession])
+    render :index
+  end
+
   # GET /professionals/1/edit
   def edit
   end

@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   get 'customers/:id' => 'customers#show'
 
+    get 'professionals/search', to: 'professionals#search'
+
   resources :professionals
   resources :customers
   resources :charges

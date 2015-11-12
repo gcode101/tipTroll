@@ -16,4 +16,28 @@ class Professional < ActiveRecord::Base
   	pro_ratings.sum(:score) / pro_ratings.size
 	end
 
+  def self.search(zip_code, profession)
+    results_a = []
+    results_b = []
+    final_results = []
+
+    if zip_code && profession
+     results_a = self.where('job_location LIKE ?', "%#{zip_code}%")
+     results_b = self.where('job_title LIKE ?', "%#{profession}%")
+
+
+     results_a.each do |a_list|
+      results_b.each do |b_list|
+
+        if a_list == b_list
+          final_results << a_list
+        end
+      end
+     end
+    else
+      return "Please enter something in the search box."
+    end
+    final_results
+  end
+
 end

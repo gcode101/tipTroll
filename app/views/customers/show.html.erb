@@ -16,7 +16,6 @@
   <button type="button" class="btn btn-primary tip-btn" value="" id="charge">Pay Tip</button>
 </div>
 <!-- <button type="button" class="btn btn-primary">Primary</button> -->
-
 <%= form_tag charges_path do %>
 
 
@@ -59,6 +58,7 @@ payAction = function() {
   });
 
 
+
 }
 
 $(document).ready(payAction);
@@ -72,7 +72,8 @@ $(document).ready(payAction);
 <%= link_to('Edit', edit_customer_path(@customer)) %>
 <% end %>|
 
-<%= link_to 'Locate Professionals', professionals_path%> |
+
+<%= link_to 'Locate Professionals', professionals_path %> |
 <%= link_to 'Logout', logout_path %>
 
 
@@ -95,6 +96,7 @@ $(document).ready(payAction);
   var ratingType = "<%= @rating.class.to_s %>";
 	userRating(theScore, ratingId);
 </script>
+
 
 
 <h2>My Favorites</h2>
