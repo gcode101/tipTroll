@@ -16,9 +16,8 @@ Rails.application.routes.draw do
   post 'ratings/new', to: 'ratings#new'
 
 
-  resources :professionals do
-    put :favorite, on: :member
-  end
+  post '/favorites/:professional_id' => 'favorites#create', as: :add_to_favorites
+  delete '/favorites/:professional_id' => 'favorites#delete', as: :remove_from_favorites
 
 
   # The priority is based upon order of creation: first created -> highest priority.

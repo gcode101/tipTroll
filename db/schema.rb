@@ -38,11 +38,13 @@ ActiveRecord::Schema.define(version: 20151107223442) do
 
   create_table "favorites", force: :cascade do |t|
     t.integer  "customer_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "professional_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   add_index "favorites", ["customer_id"], name: "index_favorites_on_customer_id", using: :btree
+  add_index "favorites", ["professional_id"], name: "index_favorites_on_professional_id", using: :btree
 
   create_table "pro_ratings", force: :cascade do |t|
     t.integer  "customer_id"
@@ -81,6 +83,7 @@ ActiveRecord::Schema.define(version: 20151107223442) do
   add_foreign_key "cust_ratings", "customers"
   add_foreign_key "cust_ratings", "professionals"
   add_foreign_key "favorites", "customers"
+  add_foreign_key "favorites", "professionals"
   add_foreign_key "pro_ratings", "customers"
   add_foreign_key "pro_ratings", "professionals"
   add_foreign_key "tips", "customers"

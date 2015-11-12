@@ -11,7 +11,8 @@ class Customer < ActiveRecord::Base
 
 	has_many :cust_ratings, dependent: :destroy
 	has_many :pro_ratings
-  has_many :favorite_professionals
+  has_many :professionals, :through => :professionals
+  has_many :favorites, dependent: :destroy
 
 	def formatted_price
     price_in_dollars = (price_in_cents.to_f / 100) *100

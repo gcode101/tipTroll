@@ -1,4 +1,4 @@
-<p id="notice"> <%= notice %></p>
+ <p id="notice"> <%= notice %></p>
 <div class="message" style="width:400px; height: 50px; background: green; color: white; display: none;"></div>
 <p>
   <strong>Name:</strong>
@@ -11,8 +11,10 @@
 </p>
 
 <p>How much would like you to contribute?</p>
-<input value="" id="amount">
-<button type="button" class="btn btn-primary" value="" id="charge">Pay Tip</button>
+<div>
+  <input value="" class="amount">
+  <button type="button" class="btn btn-primary tip-btn" value="" id="charge">Pay Tip</button>
+</div>
 <!-- <button type="button" class="btn btn-primary">Primary</button> -->
 
 <%= form_tag charges_path do %>
@@ -24,7 +26,7 @@ payAction = function() {
     key: "<%= Rails.application.secrets[:stripe_publishable_key] %>",
     token: function(token) {
       var postData = {
-        amount: parseFloat($('#amount').val()) * 100,
+        amount: parseFloat($('.amount').val()) * 100,
         stripeToken: token.id,
       }
 
@@ -33,7 +35,7 @@ payAction = function() {
                 url: '/charges',
                 data: postData,
                 success: function (reservation) {
-                  $('.message').append('<h2>Thank you, you paid $<strong>' + $('#amount').val() + '</strong>!</h2>');
+                  $('.message').append('<h2>Thank you, you paid $<strong>' + $('.amount').val() + '</strong>!</h2>');
                   $('.message').show();
                 },
                 error: function (request, error) {
@@ -46,15 +48,17 @@ payAction = function() {
   });
 
 
-  $('#charge').on('click', function(e) {
+  $('.tip-btn').on('click', function(e) {
     e.preventDefault();
-    var total = parseFloat($('#amount').val()) * 100;
+    var total = parseFloat($(this).siblings('.amount').val()) * 100;
     handler.open({
               name: 'Tip',
               description: 'Input Your Payment Details',
               amount: total
           });
   });
+
+
 }
 
 $(document).ready(payAction);
@@ -68,8 +72,10 @@ $(document).ready(payAction);
 <%= link_to('Edit', edit_customer_path(@customer)) %>
 <% end %>|
 
-<%= link_to 'Back', customers_path %> |
+<%= link_to 'Locate Professionals', professionals_path%> |
 <%= link_to 'Logout', logout_path %>
+
+
 
 <h3>Average rating</h3>
 
@@ -89,3 +95,29 @@ $(document).ready(payAction);
   var ratingType = "<%= @rating.class.to_s %>";
 	userRating(theScore, ratingId);
 </script>
+
+
+<h2>My Favorites</h2>
+      <% @favorites.each do |favorite| %>
+        <div class="hidden" style="display: none;"><%= pro = Professional.find(favorite.professional_id) %></div>
+        <%= pro.name %>
+        <%= pro.job_title %>
+        <%= "-" * 20 %>
+        <div>
+        <input value="" class="amount">
+        <button type="button" class="btn btn-primary tip-btn" value="" id="charge2">Pay Tip2</button>
+        </div>
+        <br/>
+
+
+      <% end %>
+
+
+
+
+
+
+
+
+
+

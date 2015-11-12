@@ -1,3 +1,4 @@
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -45,5 +46,14 @@
   var ratingType = "<%= @rating.class.to_s %>";
   proUserRating(theScore, ratingId);
 </script>
+<br>
+<% if current_customer %>
+  <% if @favorite %>
+    <%= link_to "unfavorite", remove_from_favorites_path(@professional), method: :delete%>
+  <% else %>
+    <%= link_to "favorite", add_to_favorites_path(@professional), method: :post%>
+  <% end %>
+<% end %>
+
 
 

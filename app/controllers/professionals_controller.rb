@@ -11,6 +11,9 @@ class ProfessionalsController < ApplicationController
   # GET /professionals/1.json
   def show
      @rating = ProRating.find_or_create_by(professional_id: @professional.id)
+     if current_customer
+        @favorite = current_customer.favorites.find_by(professional_id: @professional.id)
+     end
   end
 
   # GET /professionals/new
@@ -59,6 +62,21 @@ class ProfessionalsController < ApplicationController
       format.html { redirect_to professionals_url, notice: 'Professional was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def favorite
+    type = params[:type]
+      if type == "favorite"
+        current_customer.favorites << @professional
+        redirect_to :back, notice: 'You favorited #{@professional.name}'
+
+      elsif type == "unfavorite"
+        current_customer.favorites.delete(@professional)
+        redirect_to :back, notice: 'Unfavorited #{@professional.name}'
+
+      else
+        redirect_to :back, notice: 'Nothing happened.'
+      end
   end
 
   private

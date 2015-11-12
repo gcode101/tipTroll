@@ -13,6 +13,7 @@ class CustomersController < ApplicationController
   def show
     # @rating = Rating.where(customer_id: @current_customer.id).first
     @rating = CustRating.find_or_create_by(customer_id: @customer.id)
+    @favorites = Favorite.where(:customer_id => current_customer)
   end
 
   # GET /customers/new
