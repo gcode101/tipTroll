@@ -1,6 +1,7 @@
- <p id="notice"> <%= notice %></p>
-<div class="message" style="width:400px; height: 50px; background: green; color: white; display: none;"></div>
+<p id="notice"> <%= notice %></p>
+<div class="message" style="width:400px; height: 100px; background: green; color: white; display: none;"></div>
 <p>
+<br>
   <strong>Name:</strong>
   <%= @customer.name %>
 </p>
@@ -37,10 +38,14 @@ payAction = function() {
                 url: '/charges',
                 data: postData,
                 success: function (reservation) {
-                  formatted_total = '$' + (total/100) + '.' + (total%100);
+
+                  total = total/100
+                  var formatted_total = total.toFixed(2).toLocaleString();
+                  // formatted_total = '$' + (total/100) + '.' + (total%100);
+
 
                   $('.message').empty();
-                  $('.message').append('<h2>Thank you, you paid $<strong>' + formatted_total + '</strong>!</h2>');
+                  $('.message').append('<h2>Thank you, you paid <strong>' + formatted_total + '</strong>!</h2>');
                   $('.message').show();
                 },
                 error: function (request, error) {
