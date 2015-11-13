@@ -11,7 +11,7 @@ class ProfessionalsController < ApplicationController
   # GET /professionals/1.json
   def show
      @rating = ProRating.find_or_create_by(professional_id: @professional.id)
-     if current_customer
+     if current_customer && !current_customer.favorites.empty?
         @favorite = current_customer.favorites.find_by(professional_id: @professional.id)
      end
   end
