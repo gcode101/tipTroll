@@ -122,10 +122,11 @@ var ready = function(){
           markerON = true;
           for (var i = 0; i < pros.length; i++) {
             person = pros[i];
+            console.log(person);
             var address = person.job_location;
             var name = person.name;
             var jobTitle = person.job_title;
-            var score = person.average_rating;
+            var score = person.rating_score;
             add_marker(map, address, name, jobTitle, score);
           };
         }

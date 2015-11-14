@@ -19,11 +19,10 @@ class Customer < ActiveRecord::Base
     format("$%.2f", price_in_dollars)
 	end
 
-	def average_rating(score)
-    current_ave = cust_ratings[0].score
-    summation = current_ave + score.to_i
-    summation / 2
-	end
-
+	# def average_rating(incoming_score)
+ #    current_ave = cust_ratings[0].score
+ #    summation = current_ave + incoming_score.to_i
+ #    summation / 2
+	# end
 
 end

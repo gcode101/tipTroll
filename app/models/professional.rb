@@ -12,10 +12,17 @@ class Professional < ActiveRecord::Base
 	has_many :cust_ratings
 	has_many :pro_ratings, dependent: :destroy
 
-	def average_rating(score)
-    current_ave = pro_ratings[0].score
-    summation = current_ave + score.to_i
-    summation / 2
+	def average_rating(incoming_score)
+    if pro_ratings[0].score == 0
+      self.update(rating_score: incoming_score)
+      incoming_score
+    else
+      current_ave = pro_ratings[0].score
+      summation = current_ave + incoming_score.to_i
+      results = summation / 2
+      self.update(rating_score: results)
+      results
+    end
 	end
 
   def self.search(zip_code, profession)
