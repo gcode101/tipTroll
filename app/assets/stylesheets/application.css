@@ -14,6 +14,9 @@
  *= require_self
  */
 
+ .hideable {
+    display: none;
+ }
 
 body {
     overflow-x: hidden;
@@ -276,7 +279,7 @@ header {
     text-align: center;
     color: #fff;
     background-attachment: scroll;
-    background-image: url(./BarMainImage.jpg);
+    /*background-image: url(./BarMainImage.jpg);*/
     background-position: center center;
     background-repeat: none;
     -webkit-background-size: cover;

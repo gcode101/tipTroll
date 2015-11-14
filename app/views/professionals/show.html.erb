@@ -32,7 +32,7 @@
 
 <h3>Average rating</h3>
 
-<div class="pro_average_rating" data-score="<%= @professional.average_rating %>"></div>
+<div class="pro_average_rating" data-score="<%= @rating.score %>"></div>
 
 
 <h1>Ratings</h1>
@@ -43,7 +43,7 @@
   var theScore = <%= @rating.score %>;
   var ratingId = <%= @rating.id %>;
   var ratingType = "<%= @rating.class.to_s %>";
-  proUserRating(theScore, ratingId);
+  proUserRating(ratingType, ratingId);
 </script>
 <br>
 <% if current_customer %>
