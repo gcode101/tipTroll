@@ -20,3 +20,13 @@
 #map-container #map-canvas label {
   width: auto; display:inline;
 }
+
+.fav {
+  font-size: 20pt;
+  font-family: sans-serif;
+  font-style: bold;
+}
+
+#profilePic {
+  border-radius: 50%;
+}
