@@ -1,5 +1,26 @@
- <p id="notice"> <%= notice %></p>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+<%= render 'layouts/generic_header' %>
+<p id="notice"> <%= notice %></p>
+
+<div class="container">
+ <div class="row">
+    <div class="col-sm-10">
+
 <div class="message" style="width:400px; height: 50px; background: green; color: white; display: none;"></div>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th><strong>Name:</strong></th>
+      <th><strong>Email:</strong></th>
+  </tr>
+</thead>
+  <td><%= @customer.name %></td>
+  <td><%= @customer.email %></td>
+</table>
+
+
+<!--
 <p>
   <strong>Name:</strong>
   <%= @customer.name %>
@@ -8,7 +29,7 @@
 <p>
   <strong>Email:</strong>
   <%= @customer.email %>
-</p>
+</p> -->
 
 <p>How much would like you to contribute?</p>
 <div>
@@ -73,15 +94,13 @@ $(document).ready(payAction);
 </script>
 <% end %>
 
+<br>
 
 <% if is_this_me?(@customer) %>
-<%= link_to('Edit', edit_customer_path(@customer)) %>
-<% end %>|
-
-
-<%= link_to 'Locate Professionals', professionals_path %> |
-<%= link_to 'Logout', logout_path %>
-
+<button type="button" class="btn btn-success"><%= link_to('Edit', edit_customer_path(@customer)) %></button>
+<% end %>
+<button type="button" class="btn btn-success"><%= link_to 'Locate Professionals', professionals_path %></button>
+<button type="button" class="btn btn-success"><%= link_to 'Logout', logout_path %></button>
 
 
 <h3>Average rating</h3>

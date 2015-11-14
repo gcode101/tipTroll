@@ -876,3 +876,62 @@ img::-moz-selection {
 body {
     webkit-tap-highlight-color: #32cd32;
 }
+
+.centeringform {
+    display: block;
+    float: none !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center
+}
+
+
+.roundedimg {
+  border-radius: 50%;
+  width: 20%;
+  padding: 30px;
+  opacity: 1.0;
+  z-index: 1;
+}
+
+.roundedimg:hover {
+  opacity: 0.4;
+
+}
+
+a:hover {
+  text-decoration:  none;
+  color: none;
+
+}
+
+#homepage {
+  margin-top: 6em;
+
+}
+
+#header {
+    padding: 2.5%;
+    background-color: black;
+    font-family: 'Fira Sans', sans-serif;
+    width: 0 auto;
+    margin: 0 auto;
+
+}
+
+
+#headerimage {
+    width: 10%;
+    display: block;
+    float: none !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center
+
+}
+
+
+.btn-success a{
+    color: white;
+}
+

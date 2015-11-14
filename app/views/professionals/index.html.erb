@@ -1,8 +1,9 @@
-<p id="notice"><%= notice %></p>
+<%= render 'layouts/generic_header' %>
+<p id="notice"> <%= notice %></p>
 
 <h1>Listing Professionals</h1>
 
-<table>
+<table class="table table-bordered">
   <thead>
     <tr>
       <th>Name</th>
@@ -10,9 +11,7 @@
       <th>Job location</th>
       <th>Job title</th>
       <th>Phone number</th>
-      <th>Score</th>
-
-      <th colspan="3"></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -34,11 +33,10 @@
 
 <br>
 
-<%= link_to 'Logout', pro_logout_path %>
-
+<button type="button" class="btn btn-success"><%= link_to 'Logout', pro_logout_path %></button>
 
 <% if current_customer %>
-<%= link_to 'back to profile', customer_path(current_customer) %>
+<button type="button" class="btn btn-success"><%= link_to 'Back To Profile', customer_path(current_customer) %></button>
 <% end %>
 
 

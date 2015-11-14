@@ -1,36 +1,34 @@
+<%= render 'layouts/generic_header' %>
+<p id="notice"> <%= notice %></p>
 
-<p id="notice"><%= notice %></p>
+<div class="container">
+ <div class="row">
+    <div class="col-sm-10">
 
-<p>
-  <strong>Name:</strong>
-  <%= @professional.name %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @professional.email %>
-</p>
-
-<p>
-  <strong>Job location:</strong>
-  <%= @professional.job_location %>
-</p>
-
-<p>
-  <strong>Job title:</strong>
-  <%= @professional.job_title %>
-</p>
-
-<p>
-  <strong>Phone number:</strong>
-  <%= @professional.phone_number %>
-</p>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th><strong>Photo:</strong></th>
+      <th><strong>Name:</strong></th>
+      <th><strong>Email:</strong></th>
+      <th><strong>Job location:</strong></th>
+      <th><strong>Job title:</strong></th>
+      <th><strong>Phone number:</strong></th>
+  </tr>
+</thead>
+  <td><%= @professional.picture %></td>
+  <td><%= @professional.name %></td>
+  <td><%= @professional.email %></td>
+  <td><%= @professional.job_location %></td>
+  <td><%= @professional.job_title %></td>
+  <td><%= @professional.phone_number %></td>
+</table>
 
 <% if is_this_pro?(@professional) %>
-<%= link_to('Edit', edit_professional_path(@professional)) %>
+<button type="button" class="btn btn-success"><%= link_to('Edit', edit_professional_path(@professional)) %></button>
 <% end %>
-<%= link_to 'Back', professionals_path %>
-<%= link_to 'Logout', pro_logout_path %>
+<button type="button" class="btn btn-success"><%= link_to 'Back', professionals_path %></button>
+<button type="button" class="btn btn-success"><%= link_to 'Logout', pro_logout_path %></button>
 
 <h3>Average rating</h3>
 
