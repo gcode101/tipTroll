@@ -1,8 +1,9 @@
-<p id="notice"><%= notice %></p>
+<%= render 'layouts/generic_header' %>
+<p id="notice"> <%= notice %></p>
 
 <h1>Listing Customers</h1>
 
-<table>
+<table class="table table-bordered">
   <thead>
     <tr>
       <th>Name</th>
@@ -22,7 +23,8 @@
     <% end %>
   </tbody>
 </table>
-<%= link_to 'Logout', logout_path %>
+
+<button type="button" class="btn btn-success"><%= link_to 'Logout', logout_path %></button>
 
 
 

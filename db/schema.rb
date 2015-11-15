@@ -67,8 +67,20 @@ ActiveRecord::Schema.define(version: 20151114003637) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "username"
+    t.string   "picture"
     t.integer  "rating_score"
   end
+
+  create_table "tickets", force: :cascade do |t|
+    t.string   "student"
+    t.text     "topic"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "tutor_id"
+    t.integer  "tutorid"
+  end
+
+  add_index "tickets", ["tutor_id"], name: "index_tickets_on_tutor_id", using: :btree
 
   create_table "tips", force: :cascade do |t|
     t.integer  "customer_id"
@@ -81,12 +93,19 @@ ActiveRecord::Schema.define(version: 20151114003637) do
   add_index "tips", ["customer_id"], name: "index_tips_on_customer_id", using: :btree
   add_index "tips", ["professional_id"], name: "index_tips_on_professional_id", using: :btree
 
+  create_table "tutors", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "cust_ratings", "customers"
   add_foreign_key "cust_ratings", "professionals"
   add_foreign_key "favorites", "customers"
   add_foreign_key "favorites", "professionals"
   add_foreign_key "pro_ratings", "customers"
   add_foreign_key "pro_ratings", "professionals"
+  add_foreign_key "tickets", "tutors"
   add_foreign_key "tips", "customers"
   add_foreign_key "tips", "professionals"
 end
