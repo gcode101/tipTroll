@@ -2,11 +2,13 @@ class Professional < ActiveRecord::Base
 
   has_secure_password
 
-  # EMAIL_REGEX = /\A[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+\z/
-  # validates :username, :presence => true, :uniqueness => true, :length => { :in => 3..20 }
-  # validates :email, :presence => true, :uniqueness => true, format: { with: EMAIL_REGEX }
-  # validates :password, :confirmation => true #password_confirmation attr
-  # validates_length_of :password, :in => 6..20, :on => :create
+  EMAIL_REGEX = /\A[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+\z/
+  validates :username, :presence => true, :uniqueness => true, :length => { :in => 3..20 }
+  validates :email, :presence => true, :uniqueness => true, format: { with: EMAIL_REGEX }
+  validates :password, :confirmation => true #password_confirmation attr
+  validates_length_of :password, :in => 6..20, :on => :create
+  validates :job_location, :presence => true
+  validates :job_title, :presence => true
 
 
 	has_many :cust_ratings
@@ -46,9 +48,12 @@ class Professional < ActiveRecord::Base
     else
       return "Please enter something in the search box."
     end
-    p "i made it to the end"
-    p final_results
     final_results
+  end
+
+  def self.search_by(the_username)
+    results = self.where('username LIKE ?', "%#{the_username}%")
+    results
   end
 
 end

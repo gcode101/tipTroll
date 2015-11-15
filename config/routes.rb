@@ -7,7 +7,9 @@ Rails.application.routes.draw do
 
   get 'customers/:id' => 'customers#show'
 
-    get 'professionals/search', to: 'professionals#search'
+  get 'professionals/search', to: 'professionals#search'
+  get 'professionals/user_name_search', to: 'professionals#user_name_search'
+
 
   resources :professionals
   resources :customers
