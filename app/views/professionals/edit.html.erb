@@ -1,7 +1,16 @@
-<h1>Editing Professional</h1>
+<%= render 'layouts/generic_header' %>
+<p id="notice"> <%= notice %></p>
+
+<div class="container">
+ <div class="row">
+    <div class="col-sm-6">
+        <h1>Edit Professional</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @professional %> |
-<%= link_to 'Back', professionals_path %>
-<%= link_to 'Delete Account', @professional, method: :delete, data: { confirm: 'Are you sure?' } %>
+<br>
+
+<button type="button" class="btn btn-success"><%= link_to 'Show', @professional %></button>
+<button type="button" class="btn btn-success"><%= link_to 'Back', professionals_path %></button>
+<button type="button" class="btn btn-success"><%= link_to 'Delete Account', @professional, method: :delete, data: { confirm: 'Are you sure?' } %></button>
+

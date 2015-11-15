@@ -1,7 +1,16 @@
-<h1>Editing Customer</h1>
+<%= render 'layouts/generic_header' %>
+<p id="notice"> <%= notice %></p>
+
+<div class="container">
+ <div class="row">
+    <div class="col-sm-6">
+        <h1>Edit Customer</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @customer %> |
-<%= link_to 'Back', customers_path %>
-<td><%= link_to 'Delete Profile', @customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<br>
+
+<button type="button" class="btn btn-success"><%= link_to 'Show', @customer %></button>
+<button type="button" class="btn btn-success"><%= link_to 'Back', customers_path %></button>
+<button type="button" class="btn btn-success"><%= link_to 'Delete Profile', @customer, method: :delete, data: { confirm: 'Are you sure?' } %></button>
+

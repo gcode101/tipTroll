@@ -1,4 +1,4 @@
-payAction = function() {
+var payAction = function() {
   var handler = StripeCheckout.configure({
     key: 'pk_test_Mk8vNgS5phGlvpjadS63RMU5',
     token: function(token) {
@@ -8,18 +8,18 @@ payAction = function() {
       }
 
       $.ajax({
-                type: 'POST',
-                url: '/charges',
-                data: postData,
-                success: function (reservation) {
-                  $('.message').append('<h2>Thank you, you paid $<strong>' + $('#amount').val() + '</strong>!</h2>');
-                  $('.message').show();
-                },
-                error: function (request, error) {
-                  $('.message').append('<h2>We apologize but your payment did not go through.</h2>');
-                  $('.message').show();
-                }
-            });
+        type: 'POST',
+        url: '/charges',
+        data: postData,
+        success: function (reservation) {
+          $('.message').append('<h2>Thank you, you paid $<strong>' + $('#amount').val() + '</strong>!</h2>');
+          $('.message').show();
+        },
+        error: function (request, error) {
+          $('.message').append('<h2>We apologize but your payment did not go through.</h2>');
+          $('.message').show();
+        }
+      });
     }
 
   });
@@ -34,6 +34,6 @@ payAction = function() {
               amount: total
           });
   });
-}
-$(document).ready(payAction);
+};
+// $(document).ready(payAction);
 $(document).on('page:load', payAction);
