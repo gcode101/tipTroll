@@ -2,18 +2,29 @@ class Professional < ActiveRecord::Base
 
   has_secure_password
 
-  # EMAIL_REGEX = /\A[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+\z/
-  # validates :username, :presence => true, :uniqueness => true, :length => { :in => 3..20 }
-  # validates :email, :presence => true, :uniqueness => true, format: { with: EMAIL_REGEX }
-  # validates :password, :confirmation => true #password_confirmation attr
-  # validates_length_of :password, :in => 6..20, :on => :create
+  EMAIL_REGEX = /\A[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+\z/
+  validates :username, :presence => true, :uniqueness => true, :length => { :in => 3..20 }
+  validates :email, :presence => true, :uniqueness => true, format: { with: EMAIL_REGEX }
+  validates :password, :confirmation => true #password_confirmation attr
+  validates_length_of :password, :in => 6..20, :on => :create
+  validates :job_location, :presence => true
+  validates :job_title, :presence => true
 
 
 	has_many :cust_ratings
 	has_many :pro_ratings, dependent: :destroy
 
-	def average_rating
-  	pro_ratings.sum(:score) / pro_ratings.size
+	def average_rating(incoming_score)
+    if pro_ratings[0].score == 0
+      self.update(rating_score: incoming_score)
+      incoming_score
+    else
+      current_ave = pro_ratings[0].score
+      summation = current_ave + incoming_score.to_i
+      results = summation / 2
+      self.update(rating_score: results)
+      results
+    end
 	end
 
   def self.search(zip_code, profession)
@@ -38,6 +49,11 @@ class Professional < ActiveRecord::Base
       return "Please enter something in the search box."
     end
     final_results
+  end
+
+  def self.search_by(the_username)
+    results = self.where('username LIKE ?', "%#{the_username}%")
+    results
   end
 
 end

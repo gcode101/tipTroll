@@ -61,6 +61,37 @@ var ready = function(){
     content: "holding..."
   });
 
+  $('#userName').submit(function(event){
+    event.preventDefault();
+    var theUserName = $('#textUserName').val();
+
+    if (markerON) {
+      generateMap();
+    }
+
+    if (theUserName){
+      $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: '/professionals/user_name_search',
+        data: {
+          userName: theUserName
+        },
+        success: function(users){
+          if (users.length == 0) {
+            alert("Sorry, we couldn't find " + theUserName + " in our database.");
+            return false;
+          }
+          addingTheMarkers(users)
+        }
+      })//end of ajax
+    } else {
+      alert("Please enter the username you're looking for.");
+      return false;
+    }//end of if(theUserName)
+
+  });//end of userName submit
+
   //grab form data
   $('#chooseZip').submit(function() { // bind function to submit event of form
 
@@ -94,7 +125,7 @@ var ready = function(){
       },
       success: function (pros) {
         if(pros.length === 0) {
-          alert("Sorry, we couldn't find anybody with those specifications.");
+          alert("Sorry, we couldn't find a(n) " + profession + " within zip code " + userZip);
           return false;
         }
         if (currentLocation) {
@@ -108,32 +139,32 @@ var ready = function(){
               profession: profession
             },
             success: function(pro2){
+              if(pro2.length === 0) {
+                alert("Sorry, we couldn't find a(n) " + profession + " near you.");
+                return false;
+              }
               addingTheMarkers(pro2);
             }
           });//end ajax
         }//end of if currentLocation
         addingTheMarkers(pros);
-
-        function addingTheMarkers(pros){
-          markerON = true;
-          for (var i = 0; i < pros.length; i++) {
-            person = pros[i];
-            var address = person.job_location;
-            var name = person.name;
-            var jobTitle = person.job_title;
-            var score = person.average_rating;
-            add_marker(map, address, name, jobTitle, score);
-          };
-        }
       }
     }); // end of first ajax
-
     return false; // important: prevent the form from submitting
   }); // end submit
 
-  // $('.location').each(function(idx, item) {
-  //   add_marker(map, $(item).text());
-  // });
+  function addingTheMarkers(pros){
+    markerON = true;
+    for (var i = 0; i < pros.length; i++) {
+      person = pros[i];
+      console.log(person);
+      var address = person.job_location;
+      var name = person.name;
+      var jobTitle = person.job_title;
+      var score = person.rating_score;
+      add_marker(map, address, name, jobTitle, score);
+    };
+  }
 
 
   function add_marker(map, address, name, job_title, score) {

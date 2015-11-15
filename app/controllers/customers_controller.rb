@@ -30,20 +30,30 @@ class CustomersController < ApplicationController
   def create
     @customer = Customer.new(customer_params)
 
-    if @customer.save
-      session[:customer_id] = @customer.id
-      redirect_to customer_path(@customer)
-    else
-      redirect_to signup_path
+    respond_to do |format|
+      if @customer.save
+        format.html {
+        session[:customer_id] = @customer.id
+        redirect_to customer_path(@customer), notice: "Account was successfully created"
+        }
+        format.json {
+          session[:customer_id] = @customer.id
+          render :show, status: :create, location: @customer
+        }
+      else
+        format.html { render :new }
+        format.json { render json: @customer.errors, status: :unproccessable_entity }
+      end
     end
   end
+
 
   # PATCH/PUT /customers/1
   # PATCH/PUT /customers/1.json
   def update
     respond_to do |format|
       if @customer.update(customer_params)
-        format.html { redirect_to @customer, notice: 'Customer was successfully updated.' }
+        format.html { redirect_to @customer, notice: 'Account was successfully updated.' }
         format.json { render :show, status: :ok, location: @customer }
       else
         format.html { render :edit }
@@ -57,7 +67,7 @@ class CustomersController < ApplicationController
   def destroy
     @customer.destroy
     respond_to do |format|
-      format.html { redirect_to customers_url, notice: 'Customer was successfully destroyed.' }
+      format.html { redirect_to customers_url, notice: 'Account was successfully deleted.' }
       format.json { head :no_content }
     end
   end
@@ -70,6 +80,6 @@ class CustomersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def customer_params
-      params.require(:customer).permit(:name, :email, :password, :password_confirmation)
+      params.require(:customer).permit(:name, :username, :email, :password, :password_confirmation)
     end
 end

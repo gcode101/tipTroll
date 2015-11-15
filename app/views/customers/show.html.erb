@@ -86,21 +86,22 @@ $(document).ready(payAction);
 
 <h3>Average rating</h3>
 
-<div class="average_rating" data-score="<%= @customer.average_rating %>"></div>
+<div class="average_rating" data-score="<%= @rating.score %>"></div>
 
 <h1>Ratings</h1>
 
 <div class="user_rating"></div>
 
 <script type="text/javascript">
-	var score = <%= @customer.average_rating %>
+  var score = <%= @rating.score %>
+	// var score = <%#= @customer.average_rating %>
 </script>
 
 <script type="text/javascript">
 	var theScore = <%= @rating.score %>;
 	var ratingId = <%= @rating.id %>;
   var ratingType = "<%= @rating.class.to_s %>";
-	userRating(theScore, ratingId);
+	userRating(ratingType, ratingId);
 </script>
 
 
@@ -110,7 +111,6 @@ $(document).ready(payAction);
         <div class="hidden" style="display: none;"><%= pro = Professional.find(favorite.professional_id) %></div>
         <%= pro.name %>
         <%= pro.job_title %>
-        <%= "-" * 20 %>
         <div>
         <input value="" class="amount">
         <button type="button" class="btn btn-primary tip-btn" value="" id="charge2">Pay Tip2</button>
