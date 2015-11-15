@@ -27,7 +27,6 @@ class ProfessionalsController < ApplicationController
   end
 
   def user_name_search
-    p "inside user_name_search ======================"
     @professionals = Professional.search_by(params[:userName])
     render :index
   end
