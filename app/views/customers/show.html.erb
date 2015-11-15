@@ -81,8 +81,9 @@ payAction = function() {
                 url: '/charges',
                 data: postData,
                 success: function (reservation) {
-                    var theScore = <%= @rating.score %>;
-                    var ratingId = <%= @rating.id %>;
+                    var theRatingId = $('#charge2').data('score');
+
+                    var ratingId = theRatingId ;
                     var ratingType = "ProRating";
                     proUserRating(ratingType, ratingId);
                   // var formatted_total = total.toFixed(2).toLocaleString();
@@ -172,7 +173,7 @@ $(document).ready(payAction);
                 <input value="" class="amount">
               </div>
               <div class="col-md-3">
-                <button type="button" class="btn btn-primary tip-btn" value="" id="charge2">Tip Me Please</button>
+                <button type="button" class="btn btn-primary tip-btn" value="" id="charge2" data-score="<%=  ProRating.find_by(professional_id: pro.id).id %>">Tip Me Please</button>
               </div>
           <% end %>
         </div>

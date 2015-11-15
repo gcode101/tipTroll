@@ -5,6 +5,8 @@ class RatingsController < ApplicationController
 			@average_rating = CustRating.find(params[:rating_id]).customer.average_rating(params[:score])
 			CustRating.find(params[:rating_id]).update(score: @average_rating)
 		elsif params[:rating_type] == "ProRating"
+			p "im here in the ratings controller==================="
+			p "params id is #{params[:rating_id]}"
 			@average_rating = ProRating.find(params[:rating_id]).professional.average_rating(params[:score])
 			ProRating.find(params[:rating_id]).update(score: @average_rating)
 		end
