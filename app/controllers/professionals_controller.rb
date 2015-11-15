@@ -26,6 +26,11 @@ class ProfessionalsController < ApplicationController
     render :index
   end
 
+  def user_name_search
+    @professionals = Professional.search_by(params[:userName])
+    render :index
+  end
+
   # GET /professionals/1/edit
   def edit
   end
@@ -35,14 +40,21 @@ class ProfessionalsController < ApplicationController
   def create
     @professional = Professional.new(professional_params)
 
-    if @professional.save
-      session[:professional_id] = @professional.id
-      redirect_to professional_path(@professional)
-    else
-      redirect_to pro_signup_path, notice: "An error has ocurred!"
+    respond_to do |format|
+      if @professional.save
+        format.html {
+        session[:professional_id] = @professional.id
+        redirect_to professional_path(@professional), notice: "Account was successfully created"
+        }
+        format.json {
+          session[:professional_id] = @professional.id
+          render :show, status: :create, location: @professional
+        }
+      else
+        format.html { render :new }
+        format.json { render json: @professional.errors, status: :unproccessable_entity }
+      end
     end
-
-
   end
 
   # PATCH/PUT /professionals/1

@@ -11,8 +11,9 @@ class CustomersController < ApplicationController
   # GET /customers/1
   # GET /customers/1.json
   def show
+    @professional = Professional.new
     # @rating = Rating.where(customer_id: @current_customer.id).first
-    @rating = CustRating.find_or_create_by(customer_id: @customer.id)
+    @rating = ProRating.find_or_create_by(professional_id: @professional.id)
     @favorites = Favorite.where(:customer_id => current_customer)
   end
 
@@ -30,13 +31,23 @@ class CustomersController < ApplicationController
   def create
     @customer = Customer.new(customer_params)
 
-    if @customer.save
-      session[:customer_id] = @customer.id
-      redirect_to customer_path(@customer)
-    else
-      redirect_to signup_path
+    respond_to do |format|
+      if @customer.save
+        format.html {
+        session[:customer_id] = @customer.id
+        redirect_to customer_path(@customer), notice: "Account was successfully created"
+        }
+        format.json {
+          session[:customer_id] = @customer.id
+          render :show, status: :create, location: @customer
+        }
+      else
+        format.html { render :new }
+        format.json { render json: @customer.errors, status: :unproccessable_entity }
+      end
     end
   end
+
 
   # PATCH/PUT /customers/1
   # PATCH/PUT /customers/1.json
@@ -70,6 +81,6 @@ class CustomersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def customer_params
-      params.require(:customer).permit(:name, :email, :password, :password_confirmation)
+      params.require(:customer).permit(:name, :username, :email, :password, :password_confirmation)
     end
 end

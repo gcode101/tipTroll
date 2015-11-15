@@ -7,6 +7,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>User Name</th>
       <th>Email</th>
       <th>Job location</th>
       <th>Job title</th>
@@ -19,6 +20,7 @@
     <% @professionals.each do |professional| %>
       <tr>
         <td><%= professional.name %></td>
+        <td><%= professional.username %></td>
         <td><%= professional.email %></td>
         <td class="location"><%= professional.job_location %></td>
         <td><%= professional.job_title %></td>
@@ -41,6 +43,12 @@
 
 
 <h1>Google Maps</h1>
+
+<form method="get" id="userName">
+      <input id="textUserName" type="text" name="user" autofocus>
+      <button type="submit" class="learnButton">Find by username</button>
+      <div class="clear"></div>
+</form>
 <form method="get" id="chooseZip">
       <button type="submit" class="learnButton">Use current location</button>
       <br/>
@@ -51,7 +59,7 @@
         <button type="submit" class="learnButton">Search</button>
       </div>
       <div class="clear"></div>
-    </form>
+</form>
 <div id="map-container">
   <div id="map-canvas"></div>
 </div>

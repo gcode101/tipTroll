@@ -1,41 +1,63 @@
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<nav class="navbar navbar-inverse navbar-default" role="navigation">
 
-<%= render 'layouts/generic_header' %>
+
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+  </div>
+
+<!-- <div class="container"> -->
+<div class="col-md-12">
+  <div class="col-md-6">
+  <a class="navbar-brand" href="root_path">TipTroll</a>
+​  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="col-md-6">
+  <div class="collapse navbar-collapse navbar-ex1-collapse">
+  ​   <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "Home", root_path %></li>
+        <li><%= link_to "Log Out" %></li>
+        <li><%= link_to "Sign in" %></li>
+  ​   </ul>
+​  </div>
+  </div>
+
+</div>
+<!-- </div> -->
+
+</nav>
+
+
 <p id="notice"> <%= notice %></p>
 
-<div class="container">
- <div class="row">
-    <div class="col-sm-10">
-
-<div class="message" style="width:400px; height: 100px; background: green; color: white; display: none;"></div>
-<table class="table table-bordered">
-  <thead>
-    <tr>
-      <th><strong>Name:</strong></th>
-      <th><strong>Email:</strong></th>
-  </tr>
-</thead>
-  <td><%= @customer.name %></td>
-  <td><%= @customer.email %></td>
-</table>
-
-
+<!-- <div class="success-popup"></div> -->
 <!--
-<p>
-  <strong>Name:</strong>
-  <%= @customer.name %>
-</p>
+<div class="message" style="width:400px; height: 100px; background: green; color: white; display: none;"></div> -->
 
-<p>
-  <strong>Email:</strong>
-  <%= @customer.email %>
-</p> -->
-
-<p>How much would like you to contribute?</p>
-<div>
-  <input value="" class="amount">
-  <button type="button" class="btn btn-primary tip-btn" value="" id="charge">Pay Tip</button>
+<div class="message" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-body">
+          <div>
+          <h3>Ratings</h3>
+          <div class="pro_user_rating"></div>
+          </div>
+           <div>
+            <button type="button" class="btn btn-primary">OK</button>
+           </div>
+       </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+
+
 <!-- <button type="button" class="btn btn-primary">Primary</button> -->
 <%= form_tag charges_path do %>
 
@@ -47,6 +69,7 @@ payAction = function() {
   var handler = StripeCheckout.configure({
     key: "<%= Rails.application.secrets[:stripe_publishable_key] %>",
     token: function(token) {
+      total = $('.amount').val();
 
       var postData = {
         amount: total,
@@ -58,11 +81,18 @@ payAction = function() {
                 url: '/charges',
                 data: postData,
                 success: function (reservation) {
-                  formatted_total = '$' + (total/100) + '.' + (total%100);
+                    var theRatingId = $('#charge2').data('score');
 
-                  $('.message').empty();
-                  $('.message').append('<h2>Thank you, you paid $<strong>' + formatted_total + '</strong>!</h2>');
+                    var ratingId = theRatingId ;
+                    var ratingType = "ProRating";
+                    proUserRating(ratingType, ratingId);
+                  // var formatted_total = total.toFixed(2).toLocaleString();
+                  // formatted_total = '$' + (total/100) + '.' + (total%100);
                   $('.message').show();
+                  $('.modal-body').prepend('<h2>Thank you, you paid <strong>$' + total + '</strong>!</h2>');
+                  $('.message').on('click', 'button', function(){
+                    $('.message').hide();
+                  });
                 },
                 error: function (request, error) {
                   $('.message').empty();
@@ -94,50 +124,65 @@ $(document).ready(payAction);
 </script>
 <% end %>
 
-<br>
-
-<% if is_this_me?(@customer) %>
-<button type="button" class="btn btn-success"><%= link_to('Edit', edit_customer_path(@customer)) %></button>
-<% end %>
-<button type="button" class="btn btn-success"><%= link_to 'Locate Professionals', professionals_path %></button>
-<button type="button" class="btn btn-success"><%= link_to 'Logout', logout_path %></button>
-
-
-<h3>Average rating</h3>
-
-<div class="average_rating" data-score="<%= @rating.score %>"></div>
-
-<h1>Ratings</h1>
-
-<div class="user_rating"></div>
-
-<script type="text/javascript">
-  var score = <%= @rating.score %>
-	// var score = <%#= @customer.average_rating %>
-</script>
-
-<script type="text/javascript">
-	var theScore = <%= @rating.score %>;
-	var ratingId = <%= @rating.id %>;
-  var ratingType = "<%= @rating.class.to_s %>";
-	userRating(ratingType, ratingId);
-</script>
 
 
 
-<h2>My Favorites</h2>
-      <% @favorites.each do |favorite| %>
-        <div class="hidden" style="display: none;"><%= pro = Professional.find(favorite.professional_id) %></div>
-        <%= pro.name %>
-        <%= pro.job_title %>
-        <div>
-        <input value="" class="amount">
-        <button type="button" class="btn btn-primary tip-btn" value="" id="charge2">Pay Tip2</button>
+
+
+<div class="container">
+<div class="col-md-12">
+
+
+  <div class="col-md-3" id="verticalLine">
+        <div class="col-md-12">
+          <div id="profilepic"><img src="<%= asset_path('img/michaeljordan.jpeg') %>" alt="profile picture"/></div>
         </div>
-        <br/>
+        <div class="col-md-12">
+          <p><strong>Name:</strong><br><%= @customer.name %></p>
+        </div>
+        <div class="col-md-12">
+          <p><strong>Email:</strong><br><%= @customer.email %></p>
+        </div>
+        <div class="col-md-12">
+          <% if is_this_me?(@customer) %>
+          <%= link_to('Edit', edit_customer_path(@customer)) %>
+          <% end %>
+        </div>
+        <div class="col-md-12">
+          <%= link_to 'Locate Professionals', professionals_path %>
+        </div>
+        <div class="col-md-12">
+          <%= link_to 'Logout', logout_path %>
+        </div>
+  </div>
+
+  <div class="col-md-9">
+
+     <div class="fav"><strong>My Favorites</strong></div>
+          <% @favorites.each do |favorite| %>
+            <div class="hidden" style="display: none;"><%= pro = Professional.find(favorite.professional_id) %></div>
+          <div class="col-md-12">
+          <div class="row">
+              <div class="col-md-3">
+                <%= pro.name %>
+              </div>
+              <div class="col-md-3">
+                <%= pro.job_title %>
+              </div>
+              <div class="col-md-3">
+                <input value="" class="amount">
+              </div>
+              <div class="col-md-3">
+                <button type="button" class="btn btn-primary tip-btn" value="" id="charge2" data-score="<%=  ProRating.find_by(professional_id: pro.id).id %>">Tip Me Please</button>
+              </div>
+          <% end %>
+        </div>
+        </div>
+  </div>
 
 
-      <% end %>
+</div>
+</div>
 
 
 
