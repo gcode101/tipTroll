@@ -27,6 +27,22 @@
   font-style: bold;
 }
 
-#profilePic {
-  border-radius: 50%;
+#profilepic img {
+  border-radius: 0%;
+}
+
+#verticalLine {
+  border-right: solid #E1E1E1;
+}
+
+.success-popup{
+  position:absolute;
+  left:50%;
+  margin-left:-150px;
+  width:300px;
+  height:200px;
+  background:green;
+  color:white;
+  z-index:100;
+  display:none;
 }

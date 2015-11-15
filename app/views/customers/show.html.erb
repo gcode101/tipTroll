@@ -36,8 +36,34 @@
 
 
 <p id="notice"> <%= notice %></p>
-<div class="message" style="width:400px; height: 100px; background: green; color: white; display: none;"></div>
 
+<!-- <div class="success-popup"></div> -->
+<!--
+<div class="message" style="width:400px; height: 100px; background: green; color: white; display: none;"></div> -->
+
+<div class="message" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-body">
+          <div>
+          <h3>Ratings</h3>
+          <div class="pro_user_rating"></div>
+          </div>
+           <div>
+            <button type="button" class="btn btn-primary">OK</button>
+           </div>
+       </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+</script>
 
 
 <!-- <button type="button" class="btn btn-primary">Primary</button> -->
@@ -51,6 +77,7 @@ payAction = function() {
   var handler = StripeCheckout.configure({
     key: "<%= Rails.application.secrets[:stripe_publishable_key] %>",
     token: function(token) {
+      total = $('.amount').val();
 
       var postData = {
         amount: total,
@@ -62,15 +89,17 @@ payAction = function() {
                 url: '/charges',
                 data: postData,
                 success: function (reservation) {
-
-                  total = total/100
-                  var formatted_total = total.toFixed(2).toLocaleString();
+                    var theScore = <%= @rating.score %>;
+                    var ratingId = <%= @rating.id %>;
+                    var ratingType = "ProRating";
+                    proUserRating(ratingType, ratingId);
+                  // var formatted_total = total.toFixed(2).toLocaleString();
                   // formatted_total = '$' + (total/100) + '.' + (total%100);
-
-
-                  $('.message').empty();
-                  $('.message').append('<h2>Thank you, you paid <strong>' + formatted_total + '</strong>!</h2>');
                   $('.message').show();
+                  $('.modal-body').prepend('<h2>Thank you, you paid <strong>$' + total + '</strong>!</h2>');
+                  $('.message').on('click', 'button', function(){
+                    $('.message').hide();
+                  });
                 },
                 error: function (request, error) {
                   $('.message').empty();
@@ -113,30 +142,28 @@ $(document).ready(payAction);
 <div class="col-md-12">
 
 
-  <div class="col-md-3">
-    <div class="col-md-12">
-      <div id="profilePic"><img src="<%= asset_path('img/michaeljordan.jpeg') %>" alt="profile picture"/></div>
-    </div>
-    <div class="col-md-12">
-      <p><strong>Name:</strong><br><%= @customer.name %></p>
-    </div>
-    <div class="col-md-12">
-      <p><strong>Email:</strong><br><%= @customer.email %></p>
-    </div>
-    <div class="col-md-12">
-      <% if is_this_me?(@customer) %>
-      <%= link_to('Edit', edit_customer_path(@customer)) %>
-      <% end %>|
-    </div>
-    <div class="col-md-12">
-      <%= link_to 'Locate Professionals', professionals_path %> |
-    </div>
-    <div class="col-md-12">
-      <%= link_to 'Logout', logout_path %>
-    </div>
-
+  <div class="col-md-3" id="verticalLine">
+        <div class="col-md-12">
+          <div id="profilepic"><img src="<%= asset_path('img/michaeljordan.jpeg') %>" alt="profile picture"/></div>
+        </div>
+        <div class="col-md-12">
+          <p><strong>Name:</strong><br><%= @customer.name %></p>
+        </div>
+        <div class="col-md-12">
+          <p><strong>Email:</strong><br><%= @customer.email %></p>
+        </div>
+        <div class="col-md-12">
+          <% if is_this_me?(@customer) %>
+          <%= link_to('Edit', edit_customer_path(@customer)) %>
+          <% end %>
+        </div>
+        <div class="col-md-12">
+          <%= link_to 'Locate Professionals', professionals_path %>
+        </div>
+        <div class="col-md-12">
+          <%= link_to 'Logout', logout_path %>
+        </div>
   </div>
-
 
   <div class="col-md-9">
 

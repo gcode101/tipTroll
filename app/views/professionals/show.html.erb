@@ -36,18 +36,6 @@
 
 <div class="pro_average_rating" data-score="<%= @professional.average_rating %>"></div>
 
-
-<h1>Ratings</h1>
-
-<div class="pro_user_rating"></div>
-
-<script type="text/javascript">
-  var theScore = <%= @rating.score %>;
-  var ratingId = <%= @rating.id %>;
-  var ratingType = "<%= @rating.class.to_s %>";
-  proUserRating(theScore, ratingId);
-</script>
-<br>
 <% if current_customer %>
   <% if @favorite %>
     <%= link_to "unfavorite", remove_from_favorites_path(@professional), method: :delete%>
