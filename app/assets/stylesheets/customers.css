@@ -20,3 +20,29 @@
 #map-container #map-canvas label {
   width: auto; display:inline;
 }
+
+.fav {
+  font-size: 20pt;
+  font-family: sans-serif;
+  font-style: bold;
+}
+
+#profilepic img {
+  border-radius: 0%;
+}
+
+#verticalLine {
+  border-right: solid #E1E1E1;
+}
+
+.success-popup{
+  position:absolute;
+  left:50%;
+  margin-left:-150px;
+  width:300px;
+  height:200px;
+  background:green;
+  color:white;
+  z-index:100;
+  display:none;
+}
