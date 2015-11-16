@@ -13,6 +13,10 @@
  *= require_tree .
  *= require_self
  */
+/*.navbar {
+    position: inherit;
+}*/
+
 
  .hideable {
     display: none;
@@ -185,7 +189,6 @@ fieldset[disabled] .btn-xl.active {
 
 .navbar-default {
     border-color: transparent;
-    background-color: #222;
 }
 
 .navbar-default .navbar-brand {
@@ -248,7 +251,6 @@ fieldset[disabled] .btn-xl.active {
     .navbar-default {
         padding: 25px 0;
         border: 0;
-        background-color: #000000;
         -webkit-transition: padding .3s;
         -moz-transition: padding .3s;
         transition: padding .3s;
@@ -937,4 +939,54 @@ a:hover {
 .btn-success a{
     color: white;
 }
+
+.arrow-icons {
+    top:50%;
+    position:absolute;
+}
+
+
+/*.fa-chevron-left{
+    margin-top: 100px;
+}
+@media (min-width: 768px) and (max-width: 1023px){
+    .fa-chevron-left{
+        margin-top: 200px;
+    }
+
+}
+
+@media (min-width: 1024px){
+
+    .fa-chevron-left{
+        margin-top: 300px;
+    }
+
+}*/
+
+.others p{
+    font-size: 2em;
+    font-style: italic;
+
+}
+
+.others h3{
+    font-size: 3em;
+    margin-bottom: 15%;
+}
+
+.others {
+    background: rgba(0, 0, 0, 0.28);
+}
+
+.firstone p{
+    font-size: 3em;
+    font-style: italic;
+}
+
+.firstone h3{
+    font-size: 4em;
+    margin-bottom: 15%;
+}
+
 
