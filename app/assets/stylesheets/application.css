@@ -1006,11 +1006,14 @@ a:hover {
 .footer{
     background: gray;
     height: 200px;
+    margin-top: 200px;
+
 }
 
-.footer h4{
-    font: center;
+.footer-text h4{
+    padding: 20px;
 }
+
 
 
 
