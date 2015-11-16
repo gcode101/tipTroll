@@ -113,7 +113,7 @@ $(document).ready(payAction);
 
 
 
-<div class="container container-margin">
+<div class="container">
 <div class="col-md-12">
 
 
@@ -138,19 +138,20 @@ $(document).ready(payAction);
             <div class="hidden" style="display: none;"><%= pro = Professional.find(favorite.professional_id) %></div>
           <div class="col-md-12">
           <div class="row">
-              <div class="col-md-3">
-                <%= pro.picture %>
-              <div class="col-md-3">
+              <div class="col-md-2">
+                <%= image_tag pro.picture, :class => 'proImage' %>
+              </div>
+              <div class="col-md-4">
                 <%= pro.name %>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-2">
                 <%= pro.job_title %>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-2">
                 <input value="" class="amount">
               </div>
-              <div class="col-md-3">
-                <button type="button" class="btn btn-primary tip-btn" value="" id="charge2" data-score="<%=  ProRating.find_by(professional_id: pro.id).id %>">Tip Me Please</button>
+              <div class="col-md-2">
+                <button type="button" class="btn btn-primary tip-btn" value="" id="charge2" data-score="<%=  ProRating.find_by(professional_id: pro.id).id %>">Tip Me</button>
               </div>
           <% end %>
         </div>
@@ -160,6 +161,8 @@ $(document).ready(payAction);
 
 </div>
 </div>
+
+
 
 <%= render 'layouts/footer' %>
 
