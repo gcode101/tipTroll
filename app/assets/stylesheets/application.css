@@ -946,47 +946,76 @@ a:hover {
 }
 
 
-/*.fa-chevron-left{
-    margin-top: 100px;
-}
+
 @media (min-width: 768px) and (max-width: 1023px){
-    .fa-chevron-left{
-        margin-top: 200px;
+    .others p{
+        font-size: 2em;
+        font-style: italic;
+
+    }
+
+    .others h3{
+        font-size: 3em;
+        margin-bottom: 15%;
+    }
+
+    .others {
+        background: rgba(0, 0, 0, 0.28);
+    }
+
+    .firstone p{
+        font-size: 3em;
+        font-style: italic;
+    }
+
+    .firstone h3{
+        font-size: 4em;
+        margin-bottom: 15%;
     }
 
 }
 
 @media (min-width: 1024px){
+    .others p{
+        font-size: 2.3em;
+        font-style: italic;
 
-    .fa-chevron-left{
-        margin-top: 300px;
     }
 
-}*/
+    .others h3{
+        font-size: 2.7em;
+        margin-bottom: 15%;
+    }
 
-.others p{
-    font-size: 2em;
-    font-style: italic;
+    .others {
+        background: rgba(0, 0, 0, 0.28);
+    }
+
+    .firstone p{
+        font-size: 2.7em;
+        font-style: italic;
+    }
+
+    .firstone h3{
+        font-size: 3.7em;
+        margin-bottom: 15%;
+    }
 
 }
 
-.others h3{
-    font-size: 3em;
-    margin-bottom: 15%;
+.footer{
+    background: gray;
+    height: 200px;
+    margin-top: 200px;
+
 }
 
-.others {
-    background: rgba(0, 0, 0, 0.28);
+.footer-text h4{
+    padding: 20px;
 }
 
-.firstone p{
-    font-size: 3em;
-    font-style: italic;
-}
 
-.firstone h3{
-    font-size: 4em;
-    margin-bottom: 15%;
-}
+
+
 
 
