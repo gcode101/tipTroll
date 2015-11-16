@@ -42,36 +42,75 @@
         <!-- /.container-fluid -->
     </nav>
 
-    <!-- Header -->
-    <header>
-        <!-- Carousel -->
-        <ul style="list-style-type: none; margin-left: -250px;">
-            <li id="1" class="hideable" style="display: block;">
-               <img src="http://dreamatico.com/data_images/car/car-1.jpg">
-            </li>
-            <li id="2" class="hideable">
-                <img src="http://hdcar.info/wp-content/uploads/2015/04/bmw-cars-wallpaper-hd.jpg">
-            </li>
-            <li id="3" class="hideable">
-                <img src="http://www.hdwallpaperscool.com/wp-content/uploads/2014/04/bugatti-supercars-fabulous-hd-wallpapers.jpg">
-            </li>
-        <!-- ... and so on -->
-        </ul>
-        <pre>
-        <!-- Buttons to go back and forth between slides. -->
-        </pre>
-        <form>
-            <input type="button" value="Back" />
-            <input type="button" value="Forward" />
-        </form>
-        <div class="container">
-            <div class="intro-text">
-                <div class="intro-lead-in">Welcome To TipTroll!</div>
-                <div class="intro-heading">One Tip. One Tap. All You.</div>
-                <a href="#sign-up" class="page-scroll btn btn-xl">Get Started</a>
-            </div>
+
+<!-- Carousel  -->
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+    <li data-target="#myCarousel" data-slide-to="3"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+      <img src="<%= asset_path('img/BarMainImage.jpg') %>" alt="Chania">
+      <div class="carousel-caption">
+        <div class="firstone">
+            <p>Welcome to TipTroll!</p>
+            <h3 >ONE TIP. ONE TAP. ALL YOU.</h3>
         </div>
-    </header>
+      </div>
+    </div>
+
+    <div class="item">
+      <img src="<%= asset_path('img/DinnerOutside.jpg') %>" alt="Chania">
+      <div class="carousel-caption">
+        <div class="others">
+            <p>Romantic Dinner</p>
+            <h3 >Use TipTroll at your favorite restaurants</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <img src="<%= asset_path('img/DriverWallpaper.jpg') %>" alt="Flower">
+      <div class="carousel-caption">
+        <div class="others">
+            <p>Chauffer Service</p>
+            <h3>The best in the business accepts TipTroll</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <img src="<%= asset_path('img/Salon.jpg') %>" alt="Flower">
+      <div class="carousel-caption">
+        <div class="others">
+            <p>Beauty Salon</p>
+            <h3>Stay connected. Stay Beautiful.</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Left and right controls -->
+  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+    <span class="arrow-icons"><i class="fa fa-arrow-left"></i></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+    <span class="arrow-icons"><i class="fa fa-arrow-right"></i></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+
+
+
+
 
     <!-- Sign-Up Section -->
     <section id="sign-up">
@@ -101,7 +140,7 @@
                     </span>
                     <% end %>
                     <h4 class="service-heading">Professionals</h4>
-                    <p class="text-muted">Signup For Professionals</p>
+                    <p class="text-muted">Sign-up For Professionals</p>
                 </div>
             </div>
         </div>

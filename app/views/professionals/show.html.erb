@@ -1,49 +1,75 @@
+
 <%= render 'layouts/generic_header' %>
 <p id="notice"> <%= notice %></p>
 
+
+
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 <div class="container">
- <div class="row">
-    <div class="col-sm-10">
+    <div class="fb-profile">
+        <img align="left" class="fb-image-lg" src="http://i.imgur.com/xdq9jns.jpg" alt="Profile image example"/>
+        <img align="left" class="fb-image-profile thumbnail" src="<%= @professional.picture %>" alt="Profile image example"/>
+        <div class="fb-profile-text">
+            <h1><%= @professional.name %></h1>
+            <h1><%= @professional.job_title %></h1>
+        </div>
+    </div>
+</div> <!-- /container -->
 
-<table class="table table-bordered">
-  <thead>
-    <tr>
-      <th><strong>Photo:</strong></th>
-      <th><strong>Name:</strong></th>
-      <th><strong>Email:</strong></th>
-      <th><strong>Job location:</strong></th>
-      <th><strong>Job title:</strong></th>
-      <th><strong>Phone number:</strong></th>
-  </tr>
-</thead>
-  <td id="pro_picture"><%= image_tag @professional.picture %></td>
-  <td><%= @professional.name %></td>
-  <td><%= @professional.email %></td>
-  <td><%= @professional.job_location %></td>
-  <td><%= @professional.job_title %></td>
-  <td><%= @professional.phone_number %></td>
-</table>
 
-<% if is_this_pro?(@professional) %>
-<button type="button" class="btn btn-success"><%= link_to('Edit', edit_professional_path(@professional)) %></button>
-<% end %>
-<button type="button" class="btn btn-success"><%= link_to 'Back', professionals_path %></button>
-<button type="button" class="btn btn-success"><%= link_to 'Logout', pro_logout_path %></button>
+<div class="container">
+  <h2>Professional's information</h2>
+  <ul class="nav nav-pills">
+    <li class="active"><a data-toggle="pill" href="#home">Home</a></li>
+    <li><a data-toggle="pill" href="#menu1">Job Info</a></li>
+    <li><a data-toggle="pill" href="#menu2">Contact Info</a></li>
+    <li><a data-toggle="pill" href="#menu3">Professional Rating</a></li>
+  </ul>
 
-<h3>Average rating</h3>
-
-<div class="pro_average_rating" data-score="<%= @rating.score %>"></div>
-
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <h3>HOME</h3>
+      <p>Welcome to my profile page</p>
+      <br>
 
 <% if current_customer %>
   <% if @favorite %>
-    <%= link_to "unfavorite", remove_from_favorites_path(@professional), method: :delete%>
+  <button type="button" class="btn btn-success"><%= link_to 'Unfavorite', remove_from_favorites_path(@professional), method: :delete %></button>
   <% else %>
-    <%= link_to "favorite", add_to_favorites_path(@professional), method: :post%>
+  <button type="button" class="btn btn-success"><%= link_to 'Favorite', add_to_favorites_path(@professional), method: :post%></button>
   <% end %>
 <% end %>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <h3>Where I Work</h3>
+      <p>  <%= @professional.job_location %> <br>
+  <%= @professional.current_employer %></p>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <h3>Getting In Touch With Me</h3>
+      <p>  <%= @professional.email %> <br>
+      <%= @professional.phone_number %></p>
+    </div>
+    <div id="menu3" class="tab-pane fade">
+
+      <h3>Average Rating</h3>
+      <p><div class="pro_average_rating" data-score="<%= @rating.score %>"></div></p>
+    </div>
+  </div>
+
+<div class="fluid-container centify">
+
+<button type="button" class="btn btn-success"><%= link_to 'Back', professionals_path %></button>
+<button type="button" class="btn btn-success"><%= link_to 'Logout', pro_logout_path %></button>
+<% if is_this_pro?(@professional) %>
+        <button type="button" class="btn btn-success"><%= link_to('Edit', edit_professional_path(@professional)) %></button>
+<% end %>
+
+</div>
 
 
+
+</div>
 
 
 
