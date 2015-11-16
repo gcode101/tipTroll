@@ -12,6 +12,12 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :picture %><br>
+    <p>Add Profile Photo Url</p>
+    <%= f.text_field :picture %>
+  </div>
+
+  <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
@@ -25,15 +31,19 @@
     <%= f.label :email %><br>
     <%= f.text_field :email %>
   </div>
+
   <div class="field">
     <%= f.label :password %><br>
     <%= f.password_field :password %>
   </div>
+
     <div class="field">
     <%= f.label :password_confirmation %><br>
     <%= f.password_field :password_confirmation %>
   </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
+
 <% end %>

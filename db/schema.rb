@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151114003637) do
+ActiveRecord::Schema.define(version: 20151115190326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20151114003637) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "username"
+    t.string   "picture"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -71,17 +72,6 @@ ActiveRecord::Schema.define(version: 20151114003637) do
     t.integer  "rating_score"
   end
 
-  create_table "tickets", force: :cascade do |t|
-    t.string   "student"
-    t.text     "topic"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "tutor_id"
-    t.integer  "tutorid"
-  end
-
-  add_index "tickets", ["tutor_id"], name: "index_tickets_on_tutor_id", using: :btree
-
   create_table "tips", force: :cascade do |t|
     t.integer  "customer_id"
     t.integer  "professional_id"
@@ -93,19 +83,12 @@ ActiveRecord::Schema.define(version: 20151114003637) do
   add_index "tips", ["customer_id"], name: "index_tips_on_customer_id", using: :btree
   add_index "tips", ["professional_id"], name: "index_tips_on_professional_id", using: :btree
 
-  create_table "tutors", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   add_foreign_key "cust_ratings", "customers"
   add_foreign_key "cust_ratings", "professionals"
   add_foreign_key "favorites", "customers"
   add_foreign_key "favorites", "professionals"
   add_foreign_key "pro_ratings", "customers"
   add_foreign_key "pro_ratings", "professionals"
-  add_foreign_key "tickets", "tutors"
   add_foreign_key "tips", "customers"
   add_foreign_key "tips", "professionals"
 end
