@@ -15,11 +15,6 @@ Rails.application.configure do
   config.action_controller.perform_caching = true
 
 
-#   config.action_mailer.delivery_method = :mailgun
-#   config.action_mailer.mailgun_settings = {
-#         api_key: 'key-09e690020a1eb1ff507da1faf47c6474',
-#         domain: 'sandbox716a58b6be0847b8a9c7bf1d2e079489.mailgun.org'
-# }
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
   # For large-scale production use, consider using a caching reverse proxy like
