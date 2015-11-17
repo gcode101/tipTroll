@@ -1014,6 +1014,78 @@ a:hover {
     padding: 20px;
 }
 
+#map-canvas{
+    height: 580px;
+    padding: 50px;
+}
+
+#map-container{
+    height: 600px;
+    background: #222222;
+}
+
+.my-search-controls{
+    margin-top: 60px;
+}
+
+#search-page-title{
+    margin-top: 100px;
+    text-align: center;
+}
+
+.my-search-buttons{
+    background: black;
+    color: white;
+    border-color: green;
+    margin: 10px;
+    display: none;
+}
+
+.my-search-buttons:hover{
+    color: #32cd32;
+}
+
+#find-by-username{
+    background: black;
+    color: white;
+    border-color: green;
+    margin: 10px;
+}
+
+#near-me-button{
+    background: black;
+    color: white;
+    border-color: green;
+    margin: 10px;
+}
+
+#zip-code-button{
+    background: black;
+    color: white;
+    border-color: green;
+    margin: 10px;
+}
+
+#select-a-pro{
+    background: black;
+    color: white;
+    border-color: green;
+    margin: 10px;
+}
+
+#newSearch{
+    background: black;
+    color: white;
+    border-color: yellow;
+    margin: 10px;
+    display: none;
+}
+
+#profession{
+    margin-bottom: 10px;
+}
+
+
 
 
 

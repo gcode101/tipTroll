@@ -82,6 +82,18 @@ var ready = function(){
             alert("Sorry, we couldn't find " + theUserName + " in our database.");
             return false;
           }
+          for (i = 0; i < users.length; i++){
+            $('#the-table-body').append(
+              '<tr>' +
+                '<td>' + users[i].name + '</td>' +
+                '<td>' + users[i].username + '</td>' +
+                '<td>' + users[i].email + '</td>' +
+                '<td>' + users[i].job_location + '</td>' +
+                '<td>' + users[i].job_title + '</td>' +
+                '<td><a href="/professionals/' + users[i].id + '">View Profile</a></td>' +
+              '</tr>'
+              )
+          }
           addingTheMarkers(users)
         }
       })//end of ajax
@@ -139,14 +151,41 @@ var ready = function(){
               profession: profession
             },
             success: function(pro2){
+              console.log(pro2)
               if(pro2.length === 0) {
                 alert("Sorry, we couldn't find a(n) " + profession + " near you.");
                 return false;
+              }
+              for (i = 0; i < pro2.length; i++){
+                $('#the-table-body').append(
+                  '<tr>' +
+                    '<td>' + pro2[i].name + '</td>' +
+                    '<td>' + pro2[i].username + '</td>' +
+                    '<td>' + pro2[i].email + '</td>' +
+                    '<td>' + pro2[i].job_location + '</td>' +
+                    '<td>' + pro2[i].job_title + '</td>' +
+                    '<td><a href="/professionals/' + pro2[i].id + '">View Profile</a></td>' +
+                  '</tr>'
+                )
               }
               addingTheMarkers(pro2);
             }
           });//end ajax
         }//end of if currentLocation
+        else {
+              for (i = 0; i < pros.length; i++){
+                $('#the-table-body').append(
+                  '<tr>' +
+                    '<td>' + pros[i].name + '</td>' +
+                    '<td>' + pros[i].username + '</td>' +
+                    '<td>' + pros[i].email + '</td>' +
+                    '<td>' + pros[i].job_location + '</td>' +
+                    '<td>' + pros[i].job_title + '</td>' +
+                    '<td><a href="/professionals/' + pros[i].id + '">View Profile</a></td>' +
+                  '</tr>'
+                )
+              }
+        }
         addingTheMarkers(pros);
       }
     }); // end of first ajax
@@ -157,17 +196,17 @@ var ready = function(){
     markerON = true;
     for (var i = 0; i < pros.length; i++) {
       person = pros[i];
-      console.log(person);
       var address = person.job_location;
       var name = person.name;
       var jobTitle = person.job_title;
+      var current_emp = person.current_employer;
       var score = person.rating_score;
-      add_marker(map, address, name, jobTitle, score);
+      add_marker(map, address, name, jobTitle, score, current_emp);
     };
   }
 
 
-  function add_marker(map, address, name, job_title, score) {
+  function add_marker(map, address, name, job_title, score, current_emp) {
     new google.maps.Geocoder().geocode( { 'address': address }, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         var latitude = results[0].geometry.location.lat();
@@ -186,6 +225,7 @@ var ready = function(){
             '<div class="markerPop">' +
             '<h1>' + name + '</h1>' +
             '<h3>' + job_title + '</h3>' +
+            '<h4>' + current_emp + '</h4>' +
             '<p>' + address + '</p>' +
             '<p class="average_rating" data-score="' + score +'"></p>' +
             '</div>',

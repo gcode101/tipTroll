@@ -1,7 +1,90 @@
 <%= render 'layouts/generic_header' %>
 <p id="notice"> <%= notice %></p>
 
-<h1>Listing Professionals</h1>
+<h1 id="search-page-title">Find A Professional</h1>
+<div id="map-container">
+  <div class="col-md-12">
+    <div class="col-md-9 col-xs-12">
+      <div id="map-canvas"></div>
+    </div>
+    <div class="col-md-3 col-xs-12 text-center my-search-controls">
+      <div class="btn" id="newSearch">Begin a New Search</div></br>
+      <form method="get" id="userName">
+        <div class="btn" id="find-by-username">Find by Username</div>
+        <input id="textUserName" type="text" name="user" placeholder="enter username" autofocus hidden>
+        <button type="submit" class="learnButton btn my-search-buttons" id="userNameButton">Search</button>
+        <div class="clear"></div>
+      </form>
+      <form method="get" id="chooseZip">
+        <div class="btn" id="near-me-button">Near Me</div>
+        <div class="btn my-search-buttons" id="select-a-pro">Select a Profession</div>
+        <button type="submit" class="learnButton btn my-search-buttons" id="search-all-button">Search All</button>
+        <br/>
+        <div class="zipSearch">
+          <div class="btn" id="zip-code-button">Find by zip code</div>
+          <input id="profession" type="text" name="profession" placeholder="enter profession" autofocus hidden><br>
+          <input id="textZip" type="text" name="zip" placeholder="enter your zip code" autofocus hidden></div>
+          <button type="submit" class="learnButton btn my-search-buttons" id="search-button">Search</button>
+        </div>
+        <div class="clear"></div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('#find-by-username').click(function(){
+    $('#newSearch').fadeIn(1000);
+    $(this).hide();
+    $('#near-me-button').hide();
+    $('#zip-code-button').hide();
+    $(textUserName).fadeIn(1000);
+    $(userNameButton).fadeIn(1000);
+  });
+
+  $('#near-me-button').click(function(){
+    $('#newSearch').fadeIn(1000);
+    $(this).hide();
+    $('#find-by-username').hide();
+    $('#zip-code-button').hide();
+    $('#select-a-pro').fadeIn(1000);
+    $('#search-all-button').fadeIn(1000);
+    $('#select-a-pro').click(function(){
+      $(this).hide();
+      $('#search-all-button').hide();
+      $('#profession').fadeIn(1000);
+      $('#search-button').fadeIn(1000);
+    });
+  });
+
+  $('#zip-code-button').click(function(){
+    $('#newSearch').fadeIn(1000);
+    $(this).hide();
+    $('#near-me-button').hide();
+    $('#find-by-username').hide();
+    $('#profession').fadeIn(1000);
+    $('#textZip').fadeIn(1000);
+    $('#search-button').fadeIn(1000);
+  });
+
+  $('#newSearch').click(function(){
+    $(this).hide();
+    $('#near-me-button').hide();
+    $('#zip-code-button').hide();
+    $('#find-by-username').hide();
+    $('#select-a-pro').hide();
+    $('#search-all-button').hide();
+    $('#profession').hide();
+    $('#search-button').hide();
+    $('#textZip').hide();
+    $('#textUserName').hide();
+    $('#userNameButton').hide();
+    $('#find-by-username').fadeIn(1000);
+    $('#near-me-button').fadeIn(1000);
+    $('#zip-code-button').fadeIn(1000);
+  });
+</script>
+
 
 <table class="table table-bordered">
   <thead>
@@ -11,58 +94,22 @@
       <th>Email</th>
       <th>Job location</th>
       <th>Job title</th>
-      <th>Phone number</th>
-      <th></th>
     </tr>
   </thead>
 
-  <tbody>
-    <% @professionals.each do |professional| %>
-      <tr>
-        <td><%= professional.name %></td>
-        <td><%= professional.username %></td>
-        <td><%= professional.email %></td>
-        <td class="location"><%= professional.job_location %></td>
-        <td><%= professional.job_title %></td>
-        <td><%= professional.phone_number %></td>
+  <tbody id="the-table-body">
 
-        <td><%= link_to 'Show', professional %></td>
-
-
-    <% end %>
   </tbody>
 </table>
 
-<br>
-
-<button type="button" class="btn btn-success"><%= link_to 'Logout', pro_logout_path %></button>
+<button type="button" class="btn btn-success" style="margin-top: 30px;"><%= link_to 'Logout', pro_logout_path %></button>
 
 <% if current_customer %>
-<button type="button" class="btn btn-success"><%= link_to 'Back To Profile', customer_path(current_customer) %></button>
+<button type="button" class="btn btn-success" style="margin-top: 30px;"><%= link_to 'Back To Profile', customer_path(current_customer) %></button>
 <% end %>
 
+<br>
 
-<h1>Google Maps</h1>
-
-<form method="get" id="userName">
-      <input id="textUserName" type="text" name="user" autofocus>
-      <button type="submit" class="learnButton">Find by username</button>
-      <div class="clear"></div>
-</form>
-<form method="get" id="chooseZip">
-      <button type="submit" class="learnButton">Use current location</button>
-      <br/>
-      <h4>Or</h4>
-      <div class="zipSearch">
-        <input id="profession" type="text" name="profession" placeholder="enter profession" autofocus><br>
-        <input id="textZip" type="text" name="zip" placeholder="enter your zip code" autofocus>
-        <button type="submit" class="learnButton">Search</button>
-      </div>
-      <div class="clear"></div>
-</form>
-<div id="map-container">
-  <div id="map-canvas"></div>
-</div>
 
 <%= render 'layouts/footer' %>
 
