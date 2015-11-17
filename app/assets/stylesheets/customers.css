@@ -33,6 +33,7 @@
 
 #verticalLine {
   border-right: solid #E1E1E1;
+  height: 500px;
 }
 
 .success-popup{
@@ -96,6 +97,10 @@ body {
       z-index: 9;
       width: 20%;
   }
+}
+
+#the-spacer{
+  padding: 2%;
 }
 
 
