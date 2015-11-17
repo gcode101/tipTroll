@@ -1,6 +1,4 @@
 <nav class="navbar navbar-inverse navbar-default" role="navigation">
-
-
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
       <span class="sr-only">Toggle navigation</span>
@@ -9,31 +7,26 @@
       <span class="icon-bar"></span>
     </button>
   </div>
-
 <!-- <div class="container"> -->
-<div class="col-md-12">
-  <div class="col-md-6">
-  <a class="navbar-brand" href="/">TipTroll</a>
-​  </div>
-  <!-- Collect the nav links, forms, and other content for toggling -->
-  <div class="col-md-6">
-  <div class="collapse navbar-collapse navbar-ex1-collapse">
-  ​   <ul class="nav navbar-nav navbar-right">
-      <% if session[:customer_id] %>
-        <li><%= link_to "Home", customer_path(current_customer) %></li>
-      <% elsif session[:professional] %>
-        <li><%= link_to "Home", professional_path(current_professional) %></li>
-      <% else %>
-        <li><%= link_to "Home", root_path %></li>
-      <% end %>
-      <% if session[:customer_id] || session[:professional] %>
-        <li><%= link_to "Log Out", logout_path %></li>
-      <% end %>
-  ​   </ul>
-​  </div>
+  <div class="col-md-12">
+    <div class="col-md-6">
+      <a class="navbar-brand" href="/">TipTroll</a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="col-md-6">
+      <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <% if session[:customer_id] %>
+            <li><%= link_to "Home", customer_path(current_customer) %></li>
+            <li><%= link_to "Log Out", logout_path %></li>
+          <% elsif session[:professional] %>
+            <li><%= link_to "Home", professional_path(current_professional) %></li>
+            <li><%= link_to "Log Out", pro_logout_path %></li>
+          <% else %>
+            <li><%= link_to "Home", root_path %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
   </div>
-
-</div>
-<!-- </div> -->
-
 </nav>
