@@ -3,14 +3,14 @@
 
 
 <div class="container">
-    <div class="fb-profile">
-        <img align="left" class="fb-image-lg" src="http://i.imgur.com/xdq9jns.jpg" alt="Profile image example"/>
-        <img align="left" class="fb-image-profile thumbnail" src="<%= @customer.picture %>" alt="Profile image"/>
-        <div class="fb-profile-text">
-            <h1><%= @customer.name %></h1>
-            <p><strong>Email:</strong><br><%= @customer.email %></p>
-        </div>
+  <div class="fb-profile">
+    <img align="left" class="fb-image-lg" src="http://i.imgur.com/xdq9jns.jpg" alt="Profile image example"/>
+    <img align="left" class="fb-image-profile thumbnail" src="<%= @customer.picture %>" alt="Profile image"/>
+    <div class="fb-profile-text">
+      <h1><%= @customer.name %></h1>
+      <p><strong>Email:</strong><br><%= @customer.email %></p>
     </div>
+  </div>
 </div> <!-- /container -->
 
 
@@ -28,13 +28,14 @@
       <div class="modal-header">
         <div class="modal-body">
           <div>
-          <h3>Ratings</h3>
-          <div class="pro_user_rating"></div>
+            <h3>Ratings</h3>
+            <div class="pro_user_rating">
+            </div>
           </div>
-           <div>
+          <div>
             <button type="button" class="btn btn-primary">OK</button>
-           </div>
-       </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -114,65 +115,55 @@ $(document).ready(payAction);
 
 
 <div class="container">
-<div class="col-md-12">
+  <div class="col-md-12">
+    <div class="col-md-3" id="verticalLine">
+      <div class="col-md-12">
+        <% if is_this_me?(@customer) %>
+        <button type="button" class="btn btn-success"><%= link_to('EDIT', edit_customer_path(@customer)) %></button>
+        <% end %>
+      </div>
+      <div class="col-md-12" id="spacer">
+        <button type="button" class="btn btn-success"><%= link_to 'LOCATE PROFESSIONALS', professionals_path %></button>
+      </div>
+      <div class="col-md-12" id="spacer">
+        <button type="button" class="btn btn-success"><%= link_to 'LOGOUT', logout_path %></button>
+      </div>
+    </div>
 
-
-  <div class="col-md-3" id="verticalLine">
-        <div class="col-md-12">
-          <% if is_this_me?(@customer) %>
-          <button type="button" class="btn btn-success"><%= link_to('EDIT', edit_customer_path(@customer)) %></button>
+    <div class="col-md-9">
+      <div class="fav">
+        <strong>My Favorites</strong>
+      </div>
+      <% @favorites.each do |favorite| %>
+      <div class="hidden" style="display: none;">
+        <%= pro = Professional.find(favorite.professional_id) %>
+      </div>
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-2">
+            <%= image_tag pro.picture, :class => 'proImage' %>
+          </div>
+          <div class="col-md-3">
+            <%= pro.name %>
+          </div>
+          <div class="col-md-2">
+            <%= pro.job_title %>
+          </div>
+          <div class="col-md-2">
+            <input value="" class="amount">
+          </div>
+          <div class="col-md-1">
+            <button type="button" class="btn btn-primary tip-btn" value="" id="charge2" data-score="<%=  ProRating.find_by(professional_id: pro.id).id %>">Tip Me</button>
+          </div>
+          <div class="col-md-2">
+          </div>
           <% end %>
         </div>
-        <div class="col-md-12" id="spacer">
-          <button type="button" class="btn btn-success"><%= link_to 'LOCATE PROFESSIONALS', professionals_path %></button>
-        </div>
-        <div class="col-md-12" id="spacer">
-          <button type="button" class="btn btn-success"><%= link_to 'LOGOUT', logout_path %></button>
-        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="col-md-9">
-
-     <div class="fav"><strong>My Favorites</strong></div>
-          <% @favorites.each do |favorite| %>
-            <div class="hidden" style="display: none;"><%= pro = Professional.find(favorite.professional_id) %></div>
-          <div class="col-md-12">
-          <div class="row">
-              <div class="col-md-2">
-                <%= image_tag pro.picture, :class => 'proImage' %>
-              </div>
-              <div class="col-md-4">
-                <%= pro.name %>
-              </div>
-              <div class="col-md-2">
-                <%= pro.job_title %>
-              </div>
-              <div class="col-md-2">
-                <input value="" class="amount">
-              </div>
-              <div class="col-md-2">
-                <button type="button" class="btn btn-primary tip-btn" value="" id="charge2" data-score="<%=  ProRating.find_by(professional_id: pro.id).id %>">Tip Me</button>
-              </div>
-          <% end %>
-        </div>
-        </div>
-  </div>
-
-
 </div>
 </div>
-
-
+</div>
 
 <%= render 'layouts/footer' %>
-
-
-
-
-
-
-
-
-
-
-
