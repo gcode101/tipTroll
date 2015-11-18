@@ -11,8 +11,8 @@ $(document).on('page:load', ready2);
 
 function averageRating(avgScore){
 	$('.average_rating').raty({
-		starOn: "<%= asset_path('img/star-on.png') %>",
-		starOff: "<%= asset_path('img/star-off.png') %>",
+		starOn: "<%= image_path('star-on.png') %>",
+		starOff: "<%= image_path('star-off.png') %>",
 		readOnly: true,
 		score: avgScore,
 		noRatedMsg : "I haven't been rated yet!"
@@ -21,9 +21,9 @@ function averageRating(avgScore){
 
 	function userRating(ratingType, ratingId){
 	$('.user_rating').raty({
-		starOn: "<%= asset_path('img/star-on.png') %>",
-    starOff: "<%= asset_path('img/star-off.png') %>",
-    hints: ['I will kill you if you click this button', 'I thought we were boys', 'what?', 'Ok we still cool', 'beast mode bitch '],
+		starOn: "<%= image_path('star-on.png') %>",
+    starOff: "<%= image_path('star-off.png') %>",
+    hints: ['I will kill you if you click this button', 'I thought we were boys', 'what?', 'Ok we still cool', 'beast mode '],
 		click: function(score, evt) {
       $.ajax({
         url: '/ratings/new',
@@ -44,8 +44,8 @@ function averageRating(avgScore){
 
 function proAverageRating(proAvgScore){
 	$('.pro_average_rating').raty({
-		starOn: "<%= asset_path('img/star-on.png') %>",
-		starOff: "<%= asset_path('img/star-off.png') %>",
+		starOn: "<%= image_path('star-on.png') %>",
+		starOff: "<%= image_path('star-off.png') %>",
 		readOnly: true,
 		score: proAvgScore
 		});
@@ -53,8 +53,8 @@ function proAverageRating(proAvgScore){
 
 	function proUserRating(ratingType, ratingId){
 	$('.pro_user_rating').raty({
-		starOn: "<%= asset_path('img/star-on.png') %>",
-		starOff: "<%= asset_path('img/star-off.png') %>",
+		starOn: "<%= image_path('star-on.png') %>",
+		starOff: "<%= image_path('star-off.png') %>",
 		click: function(score, evt) {
       $.ajax({
         url: '/ratings/new',
