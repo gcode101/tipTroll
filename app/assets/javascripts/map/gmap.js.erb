@@ -120,7 +120,7 @@ var ready = function(){
     if(userZip){
       accessURL = '/professionals/search';
     } else {
-      accessURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + userCords.latitude + "," + userCords.longitude + "&key=AIzaSyD1mlt84glCEnMOVTEY28A_x__LSnynxXw";
+      accessURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + userCords.latitude + "," + userCords.longitude + "&key=AIzaSyD1mlt84glCEnMOVTEY28A_x__LSnynxXw"; // <%= ENV['GMAPS_API_KEY'] %>
       currentLocation = true;
     }
 
